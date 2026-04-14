@@ -1,9 +1,15 @@
-import type { LandingSectionId } from '../../types/landing';
-import { resolveSectionOrder } from './resolveSectionOrder';
+import type {
+  LandingSectionConfig,
+  LandingSectionId,
+  LandingSectionKind
+} from '../../types/landing';
+import { resolveSections } from './resolveSectionOrder';
 
 export interface LandingSkeletonSection {
   id: string;
+  type: LandingSectionId;
   label: string;
+  kind: LandingSectionKind;
 }
 
 const sectionLabels: Record<LandingSectionId, string> = {
@@ -24,11 +30,18 @@ const sectionLabels: Record<LandingSectionId, string> = {
 };
 
 export function getLandingSkeletonSections(
-  enabledSections?: LandingSectionId[],
-  sectionOrder?: LandingSectionId[]
+  sectionsOrEnabled?: LandingSectionConfig[] | LandingSectionId[],
+  enabledOrOrder?: LandingSectionId[],
+  maybeSectionOrder?: LandingSectionId[]
 ): LandingSkeletonSection[] {
-  return resolveSectionOrder(enabledSections, sectionOrder).map((sectionId) => ({
-    id: sectionId,
-    label: sectionLabels[sectionId]
+  return resolveSections(sectionsOrEnabled, enabledOrOrder, maybeSectionOrder).map((section) => ({
+    id: section.id,
+    type: section.type,
+    kind: section.kind ?? 'slide',
+    label:
+      section.label ??
+      (section.id === section.type
+        ? sectionLabels[section.type]
+        : `${sectionLabels[section.type]} · ${section.id}`)
   }));
 }

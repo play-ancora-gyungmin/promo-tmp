@@ -1,5 +1,6 @@
 ---
 import { buildSeoMeta } from '../../lib/landing/buildSeoMeta';
+import { resolveSections } from '../../lib/landing/resolveSectionOrder';
 import { resolveThemeVariant } from '../../lib/landing/resolveThemeVariant';
 import type { LandingData } from '../../types/landing';
 import BaseLayout from './BaseLayout.astro';
@@ -14,6 +15,9 @@ export interface Props {
 const { landing } = Astro.props;
 const seo = buildSeoMeta(landing);
 const theme = resolveThemeVariant(landing.theme.variant);
+const sections = resolveSections(landing.sections, landing.enabledSections, landing.sectionOrder);
+const heroSection = sections.find((section) => section.type === 'hero');
+const contactSection = sections.find((section) => section.type === 'contact');
 ---
 
 <BaseLayout
@@ -22,7 +26,11 @@ const theme = resolveThemeVariant(landing.theme.variant);
   ogImage={seo.ogImage}
   bodyClass={`landing-body theme-${theme}`}
 >
-  <SiteHeader brand={landing.brand} />
+  <SiteHeader
+    brand={landing.brand}
+    topHref={heroSection ? `#${heroSection.id}` : '#hero'}
+    contactHref={contactSection ? `#${contactSection.id}` : '#contact'}
+  />
 
   <main class="site-main landing-main">
     <SlideDeckController client:load selector="[data-slide-section]" />

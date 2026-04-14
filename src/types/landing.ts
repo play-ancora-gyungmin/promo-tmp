@@ -1,32 +1,59 @@
-import type { ImageMetadata } from 'astro';
+import type { ImageMetadata } from "astro";
 
 export const defaultSectionOrder = [
-  'hero',
-  'trustBar',
-  'fitStudents',
-  'curriculum',
-  'teacherIntro',
-  'proof',
-  'faq',
-  'contact'
+  "hero",
+  "trustBar",
+  "fitStudents",
+  "curriculum",
+  "teacherIntro",
+  "proof",
+  "faq",
+  "contact",
 ] as const;
 
 export const optionalSectionIds = [
-  'seasonalPromo',
-  'scoreProof',
-  'schedule',
-  'location',
-  'teachingMaterials',
-  'floatingCta'
+  "seasonalPromo",
+  "scoreProof",
+  "schedule",
+  "location",
+  "teachingMaterials",
+  "floatingCta",
 ] as const;
 
-export const sectionIds = [...defaultSectionOrder, ...optionalSectionIds] as const;
+export const sectionTypes = [
+  ...defaultSectionOrder,
+  ...optionalSectionIds,
+] as const;
+export const sectionIds = sectionTypes;
 
-export const themeVariants = ['daySky', 'softBlush'] as const;
+export const themeVariants = ["daySky", "softBlush"] as const;
 
-export type LandingSectionId = (typeof sectionIds)[number];
+export type LandingSectionType = (typeof sectionTypes)[number];
+export type LandingSectionId = LandingSectionType;
 export type ThemeVariant = (typeof themeVariants)[number];
-export type LandingSectionKind = 'slide' | 'flow';
+export type LandingSectionKind = "slide" | "flow";
+
+export interface LandingSectionConfig {
+  id: string;
+  type: LandingSectionType;
+  enabled?: boolean;
+  label?: string;
+  kind?: LandingSectionKind;
+}
+
+const defaultSectionKinds: Partial<
+  Record<LandingSectionType, LandingSectionKind>
+> = {
+  floatingCta: "flow",
+};
+
+export const defaultSections: LandingSectionConfig[] = defaultSectionOrder.map(
+  (type) => ({
+    id: type,
+    type,
+    kind: defaultSectionKinds[type] ?? "slide",
+  }),
+);
 
 export interface LandingCta {
   label: string;
@@ -36,7 +63,7 @@ export interface LandingCta {
 export interface ContactField {
   name: string;
   label: string;
-  type: 'text' | 'tel' | 'email' | 'textarea';
+  type: "text" | "tel" | "email" | "textarea";
   placeholder?: string;
   required?: boolean;
 }
@@ -57,13 +84,12 @@ export interface LandingData {
   hero: {
     headline: string;
     subheadline: string;
-    points: string[];
-    primaryCta: LandingCta;
+    points?: string[];
+    primaryCta?: LandingCta;
     secondaryCta?: LandingCta;
     image?: string;
   };
-  trustBar: string[];
-  fitStudents: {
+  fitStudents?: {
     title: string;
     items: string[];
   };
@@ -96,6 +122,7 @@ export interface LandingData {
   theme: {
     variant: ThemeVariant;
   };
+  sections?: LandingSectionConfig[];
   enabledSections?: LandingSectionId[];
   sectionOrder?: LandingSectionId[];
 }
