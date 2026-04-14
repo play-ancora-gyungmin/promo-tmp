@@ -13,7 +13,7 @@ const {
   src,
   alt,
   class: className = '',
-  sizes = '(min-width: 1200px) 34rem, (min-width: 768px) 42vw, 80vw'
+  sizes = '(min-width: 1200px) 56rem, (min-width: 1025px) 48rem, 100vw'
 } = Astro.props;
 ---
 
@@ -27,7 +27,7 @@ const {
       fallbackFormat="png"
       priority
       layout="constrained"
-      widths={[480, 640, 800, 960]}
+      widths={[640, 960, 1280, 1600, 1920, 2400]}
       sizes={sizes}
     />
   )

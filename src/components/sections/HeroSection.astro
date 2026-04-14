@@ -66,6 +66,7 @@ const leadHeadlineEmphasis =
   typeof headlineData === 'object' ? headlineData.lead?.emphasis?.trim() ?? '' : '';
 const renderedHeadlineSegments = renderedHeadlineLines.map((line) => parseHeadlineSegments(line));
 const heroImage = landing.hero?.image;
+const heroImageAspectRatio = heroImage ? heroImage.width / heroImage.height : undefined;
 const imageAlt = teacherName ? `${teacherName} 강사 프로필 이미지` : `${brandName} 대표 이미지`;
 ---
 
@@ -109,9 +110,20 @@ const imageAlt = teacherName ? `${teacherName} 강사 프로필 이미지` : `${
         </div>
       </div>
 
-      <div class="hero-section__visual" aria-hidden={heroImage ? undefined : 'true'}>
+      <div
+        class="hero-section__visual"
+        aria-hidden={heroImage ? undefined : 'true'}
+        style={heroImageAspectRatio ? `--hero-image-aspect-ratio:${heroImageAspectRatio};` : undefined}
+      >
         <div class="hero-section__visual-glow"></div>
-        <HeroImage src={heroImage} alt={imageAlt} class="hero-section__portrait" />
+        <div class="hero-section__visual-frame">
+          <HeroImage
+            src={heroImage}
+            alt={imageAlt}
+            class="hero-section__portrait"
+            sizes="(min-width: 1200px) 56rem, (min-width: 1025px) 48rem, 100vw"
+          />
+        </div>
       </div>
     </div>
   </Container>
