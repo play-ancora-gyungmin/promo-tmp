@@ -1,6 +1,7 @@
 ---
 import type { LandingData } from '../../types/landing';
 import Container from './Container.astro';
+import FloatingHeaderController from '../ui/FloatingHeaderController.svelte';
 
 export interface Props {
   brand: LandingData['brand'];
@@ -9,7 +10,9 @@ export interface Props {
 const { brand } = Astro.props;
 ---
 
-<header class="site-header">
+<header class="site-header" data-scroll-state="top">
+  <FloatingHeaderController client:load selector=".site-header" />
+
   <Container class="site-header__inner">
     <div class="site-header__bar">
       <a class="site-brand" href="#hero" aria-label={`${brand.brandName} 상단으로 이동`}>

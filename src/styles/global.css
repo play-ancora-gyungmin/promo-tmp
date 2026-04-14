@@ -92,6 +92,7 @@ select {
 .site-header__inner {
   display: flex;
   align-items: center;
+  justify-content: center;
   min-height: var(--header-bar-height);
 }
 
@@ -101,6 +102,8 @@ select {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
   min-height: var(--header-bar-height);
   padding-inline: clamp(1.125rem, 3vw, 1.75rem);
   border: 1px solid rgba(255, 255, 255, 0.72);
@@ -113,6 +116,10 @@ select {
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(22px) saturate(180%);
   -webkit-backdrop-filter: blur(22px) saturate(180%);
+  transition:
+    width 260ms ease,
+    box-shadow 260ms ease,
+    background 260ms ease;
 }
 
 .site-header__bar::before {
@@ -140,6 +147,13 @@ select {
   min-height: 44px;
   align-content: center;
   text-decoration: none;
+}
+
+.site-header[data-scroll-state="condensed"] .site-header__bar {
+  width: calc(100% - clamp(2.25rem, 8vw, 7rem));
+  box-shadow:
+    0 12px 30px rgba(74, 101, 145, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.58);
 }
 
 .site-brand strong {
@@ -252,6 +266,25 @@ select {
     scroll-snap-type: none;
   }
 
+  .site-shell {
+    padding-bottom: calc(var(--header-height) + env(safe-area-inset-bottom) + 0.5rem);
+  }
+
+  .landing-main {
+    margin-top: 0;
+  }
+
+  .site-header {
+    position: fixed;
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 40;
+    padding-top: 0;
+    padding-bottom: max(0.75rem, calc(env(safe-area-inset-bottom) + 0.5rem));
+  }
+
   .site-header__inner,
   .site-footer__inner {
     padding-block: 0.875rem;
@@ -263,8 +296,13 @@ select {
   }
 
   .site-header__bar {
+    width: calc(100% - 1rem);
     min-height: 68px;
     padding-inline: 1rem;
+  }
+
+  .site-header[data-scroll-state="condensed"] .site-header__bar {
+    width: calc(100% - 1rem);
   }
 
   .site-brand {
@@ -294,7 +332,8 @@ select {
     min-height: 100svh;
     min-height: 100dvh;
     padding: 1.5rem;
-    padding-top: max(1.5rem, calc(var(--header-height) + 0.875rem));
+    padding-top: 1.5rem;
+    padding-bottom: max(1.5rem, calc(var(--header-height) + env(safe-area-inset-bottom) + 0.875rem));
   }
 
   [data-slide-section] {
