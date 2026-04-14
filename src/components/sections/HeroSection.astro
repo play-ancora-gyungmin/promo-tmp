@@ -9,6 +9,49 @@ export interface Props {
   landing: LandingData;
 }
 
+interface HeadlineSegment {
+  text: string;
+  highlight: boolean;
+}
+
+const highlightPattern = /\[\[(.+?)\]\]/g;
+
+const parseHeadlineSegments = (line: string): HeadlineSegment[] => {
+  const segments: HeadlineSegment[] = [];
+  let lastIndex = 0;
+
+  for (const match of line.matchAll(highlightPattern)) {
+    const fullMatch = match[0];
+    const highlightedText = match[1] ?? '';
+    const matchIndex = match.index ?? 0;
+
+    if (matchIndex > lastIndex) {
+      segments.push({
+        text: line.slice(lastIndex, matchIndex),
+        highlight: false
+      });
+    }
+
+    if (highlightedText) {
+      segments.push({
+        text: highlightedText,
+        highlight: true
+      });
+    }
+
+    lastIndex = matchIndex + fullMatch.length;
+  }
+
+  if (lastIndex < line.length) {
+    segments.push({
+      text: line.slice(lastIndex),
+      highlight: false
+    });
+  }
+
+  return segments.length ? segments : [{ text: line, highlight: false }];
+};
+
 const { section, landing } = Astro.props;
 const brandName = landing.brand?.brandName ?? 'Dococo Landing Template';
 const teacherName = landing.brand?.teacherName ?? '';
@@ -21,6 +64,7 @@ const leadHeadlinePrefix =
   typeof headlineData === 'object' ? headlineData.lead?.prefix?.trim() ?? '' : '';
 const leadHeadlineEmphasis =
   typeof headlineData === 'object' ? headlineData.lead?.emphasis?.trim() ?? '' : '';
+const renderedHeadlineSegments = renderedHeadlineLines.map((line) => parseHeadlineSegments(line));
 const heroImage = landing.hero?.image;
 const imageAlt = teacherName ? `${teacherName} 강사 프로필 이미지` : `${brandName} 대표 이미지`;
 ---
@@ -36,9 +80,15 @@ const imageAlt = teacherName ? `${teacherName} 강사 프로필 이미지` : `${
       <div class="hero-section__content">
         <div class="hero-section__headline-stack">
           <h1 class="hero-section__headline">
-            {renderedHeadlineLines.map((part, index) => (
-              <span class:list={['hero-section__headline-line', index === renderedHeadlineLines.length - 1 && 'is-accent']}>
-                {part}
+            {renderedHeadlineSegments.map((segments) => (
+              <span class="hero-section__headline-line">
+                {segments.map((segment) =>
+                  segment.highlight ? (
+                    <span class="hero-section__headline-highlight">{segment.text}</span>
+                  ) : (
+                    segment.text
+                  )
+                )}
               </span>
             ))}
           </h1>
