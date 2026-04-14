@@ -21,9 +21,9 @@
         desktopMedia.matches && window.scrollY > threshold ? 'condensed' : 'top';
     };
 
-    const handleScroll = () => {
+    const handleViewportChange = () => {
       if (rafId) {
-        return;
+        window.cancelAnimationFrame(rafId);
       }
 
       rafId = window.requestAnimationFrame(syncScrollState);
@@ -31,16 +31,16 @@
 
     syncScrollState();
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll);
+    window.addEventListener('scroll', handleViewportChange, { passive: true });
+    window.addEventListener('resize', handleViewportChange);
 
     return () => {
       if (rafId) {
         window.cancelAnimationFrame(rafId);
       }
 
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
+      window.removeEventListener('scroll', handleViewportChange);
+      window.removeEventListener('resize', handleViewportChange);
     };
   });
 </script>
