@@ -56,71 +56,72 @@ export const defaultSections: LandingSectionConfig[] = defaultSectionOrder.map(
 );
 
 export interface LandingCta {
-  label: string;
-  href: string;
+  label?: string;
+  href?: string;
 }
 
 export interface ContactField {
-  name: string;
-  label: string;
-  type: "text" | "tel" | "email" | "textarea";
+  name?: string;
+  label?: string;
+  type?: "text" | "tel" | "email" | "textarea";
   placeholder?: string;
   required?: boolean;
 }
 
 export interface LandingData {
-  brand: {
-    teacherName: string;
-    subject: string;
-    brandName: string;
-    tagline: string;
+  brand?: {
+    teacherName?: string;
+    subject?: string;
+    brandName?: string;
+    tagline?: string;
     logo?: ImageMetadata;
   };
-  seo: {
-    title: string;
-    description: string;
+  seo?: {
+    title?: string;
+    description?: string;
     ogImage?: string;
   };
-  hero: {
-    headline: string;
-    subheadline: string;
+  hero?: {
+    headline?: string;
+    subheadline?: string;
     points?: string[];
     primaryCta?: LandingCta;
     secondaryCta?: LandingCta;
     image?: string;
   };
+  trustBar?: string[];
   fitStudents?: {
-    title: string;
-    items: string[];
+    title?: string;
+    items?: string[];
   };
-  curriculum: Array<{
-    title: string;
-    description: string;
+  curriculum?: Array<{
+    title?: string;
+    description?: string;
     badge?: string;
   }>;
-  teacherIntro: {
-    title: string;
-    body: string;
+  teacherIntro?: {
+    title?: string;
+    body?: string;
     image?: string;
   };
-  proof: {
-    title: string;
-    reviews: Array<{
-      quote: string;
-      name: string;
+  proof?: {
+    title?: string;
+    reviews?: Array<{
+      quote?: string;
+      name?: string;
     }>;
   };
-  faq: Array<{
-    question: string;
-    answer: string;
+  faq?: Array<{
+    question?: string;
+    answer?: string;
   }>;
-  contact: {
-    title: string;
-    description: string;
-    fields: ContactField[];
+  contact?: {
+    title?: string;
+    description?: string;
+    fields?: ContactField[];
   };
-  theme: {
-    variant: ThemeVariant;
+  theme?: {
+    variant?: ThemeVariant;
   };
   sections?: LandingSectionConfig[];
   enabledSections?: LandingSectionId[];

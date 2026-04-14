@@ -4,7 +4,7 @@ import Container from './Container.astro';
 import FloatingHeaderController from '../ui/FloatingHeaderController.svelte';
 
 export interface Props {
-  brand: LandingData['brand'];
+  brand: NonNullable<LandingData['brand']>;
   topHref?: string;
   contactHref?: string;
 }
@@ -12,6 +12,7 @@ export interface Props {
 const { brand, topHref = '#hero', contactHref = '#contact' } = Astro.props;
 const hasLogo = Boolean(brand.logo?.src);
 const logoRatio = hasLogo && brand.logo ? brand.logo.width / brand.logo.height : undefined;
+const brandSubtitle = [brand.teacherName, brand.subject].filter(Boolean).join(' ');
 ---
 
 <header class="site-header" data-scroll-state="top">
@@ -39,9 +40,9 @@ const logoRatio = hasLogo && brand.logo ? brand.logo.width / brand.logo.height :
         ) : (
           <span class="site-header__brand-copy">
             <strong class="site-header__brand-name">{brand.brandName}</strong>
-            <span class="site-header__brand-subtitle">
-              {brand.teacherName} {brand.subject}
-            </span>
+            {brandSubtitle && (
+              <span class="site-header__brand-subtitle">{brandSubtitle}</span>
+            )}
           </span>
         )}
       </a>

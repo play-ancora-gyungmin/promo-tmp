@@ -14,7 +14,14 @@ export interface Props {
 
 const { landing } = Astro.props;
 const seo = buildSeoMeta(landing);
-const theme = resolveThemeVariant(landing.theme.variant);
+const theme = resolveThemeVariant(landing.theme?.variant);
+const brand = {
+  teacherName: landing.brand?.teacherName ?? '',
+  subject: landing.brand?.subject ?? '',
+  brandName: landing.brand?.brandName ?? 'Dococo Landing Template',
+  tagline: landing.brand?.tagline ?? '강사 랜딩 템플릿',
+  logo: landing.brand?.logo
+};
 const sections = resolveSections(landing.sections, landing.enabledSections, landing.sectionOrder);
 const heroSection = sections.find((section) => section.type === 'hero');
 const contactSection = sections.find((section) => section.type === 'contact');
@@ -27,7 +34,7 @@ const contactSection = sections.find((section) => section.type === 'contact');
   bodyClass={`landing-body theme-${theme}`}
 >
   <SiteHeader
-    brand={landing.brand}
+    brand={brand}
     topHref={heroSection ? `#${heroSection.id}` : '#hero'}
     contactHref={contactSection ? `#${contactSection.id}` : '#contact'}
   />
@@ -40,5 +47,5 @@ const contactSection = sections.find((section) => section.type === 'contact');
     </div>
   </main>
 
-  <SiteFooter brand={landing.brand} />
+  <SiteFooter brand={brand} />
 </BaseLayout>

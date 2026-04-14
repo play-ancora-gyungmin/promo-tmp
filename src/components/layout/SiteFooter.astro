@@ -3,20 +3,21 @@ import type { LandingData } from '../../types/landing';
 import Container from './Container.astro';
 
 export interface Props {
-  brand: LandingData['brand'];
+  brand: NonNullable<LandingData['brand']>;
 }
 
 const { brand } = Astro.props;
 const currentYear = new Date().getFullYear();
+const brandSubtitle = [brand.teacherName, brand.subject].filter(Boolean).join(' ');
 ---
 
 <footer class="site-footer">
   <Container class="site-footer__inner">
     <div class="site-footer__brand">
       <strong>{brand.brandName}</strong>
-      <small class="site-footer__brand-subtitle">
-        {brand.teacherName} {brand.subject}
-      </small>
+      {brandSubtitle && (
+        <small class="site-footer__brand-subtitle">{brandSubtitle}</small>
+      )}
     </div>
     <small>{currentYear} Dococo landing template</small>
   </Container>
