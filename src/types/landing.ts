@@ -24,6 +24,7 @@ export const themeVariants = ['daySky', 'softBlush'] as const;
 
 export type LandingSectionId = (typeof sectionIds)[number];
 export type ThemeVariant = (typeof themeVariants)[number];
+export type LandingSectionKind = 'slide' | 'flow';
 
 export interface LandingCta {
   label: string;

@@ -1,18 +1,21 @@
 ---
+import type { LandingData } from '../../types/landing';
+import Container from './Container.astro';
+
 export interface Props {
-  brandName: string;
+  brand: LandingData['brand'];
 }
 
-const { brandName } = Astro.props;
+const { brand } = Astro.props;
 const currentYear = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
-  <div class="container site-footer__inner">
+  <Container class="site-footer__inner">
     <div class="site-brand">
-      <strong>{brandName}</strong>
-      <small>Landing template scaffold only. Visual implementation comes next.</small>
+      <strong>{brand.brandName}</strong>
+      <small>{brand.teacherName} {brand.subject}</small>
     </div>
-    <small>{currentYear} Dococo promo template</small>
-  </div>
+    <small>{currentYear} Dococo landing template</small>
+  </Container>
 </footer>

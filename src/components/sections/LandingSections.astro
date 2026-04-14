@@ -1,0 +1,20 @@
+---
+import type { LandingData } from '../../types/landing';
+import { getLandingSkeletonSections } from '../../lib/landing/getLandingSkeletonSections';
+import SectionShell from '../layout/SectionShell.astro';
+
+export interface Props {
+  landing: LandingData;
+}
+
+const { landing } = Astro.props;
+const sections = getLandingSkeletonSections(landing.enabledSections, landing.sectionOrder);
+---
+
+{
+  sections.map((section) => (
+    <SectionShell id={section.id} kind="slide">
+      <span class="landing-placeholder-label">{section.label}</span>
+    </SectionShell>
+  ))
+}

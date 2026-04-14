@@ -1,7 +1,11 @@
 ---
 import { buildSeoMeta } from '../../lib/landing/buildSeoMeta';
+import { resolveThemeVariant } from '../../lib/landing/resolveThemeVariant';
 import type { LandingData } from '../../types/landing';
 import BaseLayout from './BaseLayout.astro';
+import SiteFooter from './SiteFooter.astro';
+import SiteHeader from './SiteHeader.astro';
+import SlideDeckController from '../ui/SlideDeckController.svelte';
 
 export interface Props {
   landing: LandingData;
@@ -9,10 +13,24 @@ export interface Props {
 
 const { landing } = Astro.props;
 const seo = buildSeoMeta(landing);
+const theme = resolveThemeVariant(landing.theme.variant);
 ---
 
-<BaseLayout title={seo.title} description={seo.description} ogImage={seo.ogImage}>
-  <main class="site-main">
-    <slot />
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  ogImage={seo.ogImage}
+  bodyClass={`landing-body theme-${theme}`}
+>
+  <SiteHeader brand={landing.brand} />
+
+  <main class="site-main landing-main">
+    <SlideDeckController client:load selector="[data-slide-section]" />
+
+    <div class="landing-deck">
+      <slot />
+    </div>
   </main>
+
+  <SiteFooter brand={landing.brand} />
 </BaseLayout>

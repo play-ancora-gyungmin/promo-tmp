@@ -1,5 +1,6 @@
 ---
 import type { LandingData } from '../../types/landing';
+import Container from './Container.astro';
 
 export interface Props {
   brand: LandingData['brand'];
@@ -9,10 +10,10 @@ const { brand } = Astro.props;
 ---
 
 <header class="site-header">
-  <div class="container site-header__inner">
-    <a class="site-brand" href="/">
+  <Container class="site-header__inner">
+    <a class="site-brand" href="#hero">
       <strong>{brand.brandName}</strong>
-      <span>{brand.subject} 템플릿 초기 세팅</span>
+      <span>{brand.teacherName} {brand.subject}</span>
     </a>
-  </div>
+  </Container>
 </header>

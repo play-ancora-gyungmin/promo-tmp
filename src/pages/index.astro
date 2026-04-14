@@ -1,25 +1,11 @@
 ---
-import Container from '../components/layout/Container.astro';
 import LandingLayout from '../components/layout/LandingLayout.astro';
-import SectionShell from '../components/layout/SectionShell.astro';
+import LandingSections from '../components/sections/LandingSections.astro';
 import { getLandingEntry } from '../lib/landing/getLandingEntry';
-import { getLandingSkeletonSections } from '../lib/landing/getLandingSkeletonSections';
 
 const entry = await getLandingEntry('seo-haneul-english');
-const sections = getLandingSkeletonSections(
-  entry.data.enabledSections,
-  entry.data.sectionOrder
-);
 ---
 
 <LandingLayout landing={entry.data}>
-  <Container class="page-spacer page-sections">
-    {sections.map((section) => (
-      <SectionShell
-        id={section.id}
-        eyebrow={section.label}
-        class="section-shell--placeholder"
-      />
-    ))}
-  </Container>
+  <LandingSections landing={entry.data} />
 </LandingLayout>

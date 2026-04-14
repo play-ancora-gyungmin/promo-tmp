@@ -27,14 +27,8 @@ export function getLandingSkeletonSections(
   enabledSections?: LandingSectionId[],
   sectionOrder?: LandingSectionId[]
 ): LandingSkeletonSection[] {
-  const sections = resolveSectionOrder(enabledSections, sectionOrder).map((sectionId) => ({
+  return resolveSectionOrder(enabledSections, sectionOrder).map((sectionId) => ({
     id: sectionId,
     label: sectionLabels[sectionId]
   }));
-
-  return [
-    { id: 'header', label: '헤더' },
-    ...sections,
-    { id: 'footer', label: '푸터' }
-  ];
 }
