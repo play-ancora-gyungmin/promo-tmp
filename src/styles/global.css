@@ -7,6 +7,7 @@
   --text-color: #1d2433;
   --muted-color: #545d6f;
   --accent-color: #4b79b8;
+  --hero-headline-highlight-color: #365d96;
   --section-gap: 0;
   --section-max-width: 1920px;
   --container-width: min(var(--section-max-width), calc(100% - 2rem));
@@ -494,7 +495,7 @@ select {
   display: inline-block;
   padding: 0.04em 0.12em 0.08em;
   font-weight: 900;
-  color: #17365d;
+  color: var(--hero-headline-highlight-color);
   isolation: isolate;
 }
 
@@ -517,7 +518,7 @@ select {
 .hero-section__headline-emphasis {
   display: block;
   font-weight: 900;
-  font-size: 1.2em;
+  font-size: 1.32em;
   line-height: 0.92;
 }
 
