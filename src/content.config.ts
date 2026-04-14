@@ -35,7 +35,16 @@ const teachers = defineCollection({
       ogImage: z.string().optional()
     }).partial().optional(),
     hero: z.object({
-      headline: z.string(),
+      headline: z.union([
+        z.string(),
+        z.object({
+          lines: z.array(z.string()).optional(),
+          lead: z.object({
+            prefix: z.string(),
+            emphasis: z.string()
+          }).partial().optional()
+        }).partial()
+      ]),
       subheadline: z.string(),
       points: z.array(z.string()),
       primaryCta: ctaSchema.optional(),

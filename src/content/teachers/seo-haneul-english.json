@@ -12,7 +12,16 @@
     "ogImage": "/og/seo-haneul-english.png"
   },
   "hero": {
-    "headline": "상위권의 선택, 1등급의 시선",
+    "headline": {
+      "lines": [
+        "상위권의 선택",
+        "1등급의 시선"
+      ],
+      "lead": {
+        "prefix": "대전영어는",
+        "emphasis": "서하늘영어"
+      }
+    },
     "image": "../../assets/images/teachers/seo-haneul-hero.png"
   },
   "trustBar": [

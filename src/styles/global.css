@@ -427,6 +427,11 @@ select {
   align-content: center;
 }
 
+.hero-section__headline-stack {
+  display: grid;
+  gap: clamp(0.5rem, 1vw, 0.85rem);
+}
+
 .hero-section__eyebrow-wrap {
   display: flex;
   flex-wrap: wrap;
@@ -459,18 +464,37 @@ select {
 
 .hero-section__headline {
   display: grid;
-  gap: 0.2em;
+  gap: 0.14em;
   margin: 0;
   font-family: "A2Z", "Pretendard", sans-serif;
   font-size: clamp(3.2rem, 7vw, 6.5rem);
   font-weight: 700;
-  letter-spacing: -0.055em;
-  line-height: 0.9;
+  letter-spacing: -0.01em;
+  line-height: 0.98;
+}
+
+.hero-section__headline--lead-block {
+  gap: 0.08em;
 }
 
 .hero-section__headline-line {
   display: block;
+  padding-block: 0.04em 0.08em;
+  overflow: visible;
   color: #183a6a;
+}
+
+.hero-section__headline-line--lead {
+  letter-spacing: 0;
+}
+
+.hero-section__headline-prefix {
+  font-weight: 300;
+}
+
+.hero-section__headline-emphasis {
+  display: block;
+  font-weight: 900;
 }
 
 .hero-section__headline-line.is-accent {

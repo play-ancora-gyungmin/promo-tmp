@@ -82,7 +82,15 @@ export interface LandingData {
     ogImage?: string;
   };
   hero?: {
-    headline?: string;
+    headline?:
+      | string
+      | {
+          lines?: string[];
+          lead?: {
+            prefix?: string;
+            emphasis?: string;
+          };
+        };
     subheadline?: string;
     points?: string[];
     primaryCta?: LandingCta;
