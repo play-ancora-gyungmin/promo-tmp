@@ -8,6 +8,9 @@ export interface Props {
 }
 
 const { brand } = Astro.props;
+const brandMonogram = Array.from((brand.teacherName || brand.brandName).replace(/\s+/g, ''))
+  .slice(0, 2)
+  .join('');
 ---
 
 <header class="site-header" data-scroll-state="top">
@@ -16,8 +19,18 @@ const { brand } = Astro.props;
   <Container class="site-header__inner">
     <div class="site-header__bar">
       <a class="site-brand" href="#hero" aria-label={`${brand.brandName} 상단으로 이동`}>
-        <strong>{brand.brandName}</strong>
-        <span>{brand.teacherName} {brand.subject}</span>
+        <span class="site-brand__icon" aria-hidden="true">
+          <span>{brandMonogram}</span>
+        </span>
+
+        <span class="site-brand__copy">
+          <strong>{brand.brandName}</strong>
+          <span>{brand.teacherName} {brand.subject}</span>
+        </span>
+      </a>
+
+      <a class="site-header__cta" href="#contact">
+        문의
       </a>
     </div>
   </Container>
