@@ -8,13 +8,13 @@ const teachers = defineCollection({
     base: './src/content/teachers',
     pattern: '**/*.json'
   }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     brand: z.object({
       teacherName: z.string(),
       subject: z.string(),
       brandName: z.string(),
       tagline: z.string(),
-      logo: z.string().optional()
+      logo: image().optional()
     }),
     seo: z.object({
       title: z.string(),

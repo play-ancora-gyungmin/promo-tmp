@@ -1,3 +1,5 @@
+import type { ImageMetadata } from 'astro';
+
 export const defaultSectionOrder = [
   'hero',
   'trustBar',
@@ -45,7 +47,7 @@ export interface LandingData {
     subject: string;
     brandName: string;
     tagline: string;
-    logo?: string;
+    logo?: ImageMetadata;
   };
   seo: {
     title: string;

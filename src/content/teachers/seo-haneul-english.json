@@ -4,7 +4,7 @@
     "subject": "영어",
     "brandName": "서하늘 영어",
     "tagline": "설정 단계에서 연결된 기본 엔트리",
-    "logo": "/brands/seo-haneul-ci.png"
+    "logo": "../../assets/icons/seo-haneul-ci.png"
   },
   "seo": {
     "title": "서하늘 영어 | 랜딩 템플릿 세팅",

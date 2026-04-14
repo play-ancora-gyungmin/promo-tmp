@@ -8,26 +8,40 @@ export interface Props {
 }
 
 const { brand } = Astro.props;
+const hasLogo = Boolean(brand.logo?.src);
+const logoRatio = hasLogo && brand.logo ? brand.logo.width / brand.logo.height : undefined;
 ---
 
 <header class="site-header" data-scroll-state="top">
   <FloatingHeaderController client:load selector=".site-header" />
 
   <Container class="site-header__inner">
-    <div class="site-header__bar">
+    <div
+      class:list={['site-header__bar', hasLogo && 'site-header__bar--with-logo']}
+      style={logoRatio ? `--site-header-brand-logo-ratio: ${logoRatio};` : undefined}
+    >
       <a
-        class:list={['site-brand', brand.logo && 'site-brand--logo']}
+        class:list={['site-header__brand', hasLogo && 'site-header__brand--logo']}
         href="#hero"
         aria-label={`${brand.brandName} 상단으로 이동`}
       >
-        <img
-          class="site-brand__logo"
-          src={brand.logo}
-          alt=""
-          width="1863"
-          height="441"
-          decoding="async"
-        />
+        {hasLogo && brand.logo ? (
+          <img
+            class="site-header__brand-logo"
+            src={brand.logo.src}
+            alt=""
+            width={brand.logo.width}
+            height={brand.logo.height}
+            decoding="async"
+          />
+        ) : (
+          <span class="site-header__brand-copy">
+            <strong class="site-header__brand-name">{brand.brandName}</strong>
+            <span class="site-header__brand-subtitle">
+              {brand.teacherName} {brand.subject}
+            </span>
+          </span>
+        )}
       </a>
 
       <a class="site-header__cta" href="#contact">

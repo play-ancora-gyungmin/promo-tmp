@@ -12,9 +12,11 @@ const currentYear = new Date().getFullYear();
 
 <footer class="site-footer">
   <Container class="site-footer__inner">
-    <div class="site-brand">
+    <div class="site-footer__brand">
       <strong>{brand.brandName}</strong>
-      <small>{brand.teacherName} {brand.subject}</small>
+      <small class="site-footer__brand-subtitle">
+        {brand.teacherName} {brand.subject}
+      </small>
     </div>
     <small>{currentYear} Dococo landing template</small>
   </Container>
