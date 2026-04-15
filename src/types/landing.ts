@@ -74,6 +74,13 @@ export interface ContactChannel {
   href?: string;
 }
 
+export interface ContactMapConfig {
+  latitude?: number;
+  longitude?: number;
+  zoom?: number;
+  placeName?: string;
+}
+
 export interface ScoreProofStat {
   value?: string;
   label?: string;
@@ -179,6 +186,7 @@ export interface LandingData {
     description?: string;
     address?: string;
     phone?: string;
+    map?: ContactMapConfig;
     channels?: ContactChannel[];
     fields?: ContactField[];
   };

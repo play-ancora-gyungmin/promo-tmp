@@ -4,3 +4,6 @@ dist
 .omx
 .DS_Store
 pnpm-debug.log*
+.env
+.env.local
+.env.*.local

@@ -259,6 +259,12 @@
     "title": "문의",
     "address": "(35241) 대전시 서구 둔산로 134, 아베스빌딩",
     "phone": "042-488-1211",
+    "map": {
+      "placeName": "모티브에듀학원",
+      "latitude": 36.3509441,
+      "longitude": 127.3886307,
+      "zoom": 17
+    },
     "channels": [
       {
         "kind": "kakao",

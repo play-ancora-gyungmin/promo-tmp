@@ -1,0 +1,168 @@
+---
+export interface Props {
+  mapId: string;
+}
+
+const { mapId } = Astro.props;
+
+const clientId = import.meta.env.PUBLIC_NAVER_MAPS_CLIENT_ID?.trim() ?? '';
+---
+
+<div
+  class="naver-map"
+  data-dococo-naver-map
+  data-map-id={mapId}
+  data-client-id={clientId}
+>
+  <div id={mapId} class="naver-map__canvas"></div>
+</div>
+
+<script is:inline>
+  const NAVER_MAPS_CALLBACK = '__dococoNaverMapsOnLoad';
+  const NAVER_MAPS_SCRIPT_SELECTOR = 'script[data-dococo-naver-maps="true"]';
+  const NAVER_MAPS_NAMESPACE_WAIT_MS = 5000;
+  const NAVER_MAPS_NAMESPACE_POLL_MS = 50;
+
+  function warn(message, detail) {
+    const prefix = '[Dococo:NaverMap]';
+    if (detail) {
+      console.warn(`${prefix} ${message}`, detail);
+      return;
+    }
+
+    console.warn(`${prefix} ${message}`);
+  }
+
+  function createMap(root) {
+    const clientId = root.dataset.clientId?.trim();
+    const mapId = root.dataset.mapId;
+    const target = mapId ? document.getElementById(mapId) : null;
+
+    if (!clientId) {
+      warn('PUBLIC_NAVER_MAPS_CLIENT_ID is empty.');
+      return;
+    }
+
+    if (!target) {
+      warn('Map container element was not found.', { mapId });
+      return;
+    }
+
+    if (!window.naver?.maps) {
+      warn('NAVER Maps loaded without the maps namespace.');
+      return;
+    }
+
+    new window.naver.maps.Map(mapId);
+  }
+
+  function enqueueMapInit(root) {
+    window.__dococoNaverMapQueue__ = window.__dococoNaverMapQueue__ || [];
+    window.__dococoNaverMapQueue__.push(() => createMap(root));
+  }
+
+  function flushMapQueue() {
+    const queue = window.__dococoNaverMapQueue__ || [];
+
+    while (queue.length > 0) {
+      const next = queue.shift();
+      if (typeof next === 'function') {
+        next();
+      }
+    }
+  }
+
+  function waitForMapsNamespace(onReady) {
+    if (window.naver?.maps) {
+      onReady();
+      return;
+    }
+
+    const startedAt = Date.now();
+    const pollId = window.setInterval(() => {
+      if (window.naver?.maps) {
+        window.clearInterval(pollId);
+        onReady();
+        return;
+      }
+
+      if (Date.now() - startedAt >= NAVER_MAPS_NAMESPACE_WAIT_MS) {
+        window.clearInterval(pollId);
+        warn('NAVER Maps loaded without the maps namespace.');
+      }
+    }, NAVER_MAPS_NAMESPACE_POLL_MS);
+  }
+
+  document.querySelectorAll('[data-dococo-naver-map]').forEach((root) => {
+    if (root.dataset.naverMapReady === 'true') {
+      return;
+    }
+
+    root.dataset.naverMapReady = 'true';
+
+    const clientId = root.dataset.clientId?.trim();
+
+    if (window.naver?.maps) {
+      createMap(root);
+      return;
+    }
+
+    if (!clientId) {
+      warn('PUBLIC_NAVER_MAPS_CLIENT_ID is empty.');
+      return;
+    }
+
+    enqueueMapInit(root);
+
+    window[NAVER_MAPS_CALLBACK] = () => {
+      waitForMapsNamespace(() => {
+        flushMapQueue();
+      });
+    };
+
+    window.navermap_authFailure = () => {
+      warn('NAVER Maps authentication failed. Check the Client ID and allowed domains.');
+    };
+
+    if (!document.querySelector(NAVER_MAPS_SCRIPT_SELECTOR)) {
+      const script = document.createElement('script');
+      script.src =
+        `https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${encodeURIComponent(clientId)}&callback=${NAVER_MAPS_CALLBACK}`;
+      script.async = true;
+      script.defer = true;
+      script.dataset.dococoNaverMaps = 'true';
+      script.onload = () => {
+        waitForMapsNamespace(() => {
+          flushMapQueue();
+        });
+      };
+      script.onerror = () => {
+        warn('Failed to load the NAVER Maps script.');
+      };
+
+      document.head.appendChild(script);
+    }
+  });
+</script>
+
+<style>
+  .naver-map {
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+  }
+
+  .naver-map__canvas {
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+  }
+
+  .naver-map :where(img, svg) {
+    max-width: none;
+  }
+
+  .naver-map img {
+    display: inline-block;
+  }
+</style>
