@@ -247,7 +247,7 @@ select {
 .site-footer__inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1rem;
   min-height: 92px;
 }
@@ -440,8 +440,8 @@ select {
 }
 
 .site-footer {
-  border-top: 1px solid var(--line-color);
-  background: rgba(255, 255, 255, 0.72);
+  border-top: 0;
+  background: transparent;
 }
 
 .site-footer__inner {
@@ -1692,7 +1692,7 @@ select {
   }
 
   .site-footer__inner {
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
     justify-content: center;
   }
@@ -1701,12 +1701,7 @@ select {
     padding-bottom: calc(
       var(--header-height) + env(safe-area-inset-bottom) + 0.75rem
     );
-    background:
-      linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.8),
-        rgba(241, 246, 255, 0.96)
-      );
+    background: transparent;
   }
 
   .site-footer__inner {
@@ -1714,6 +1709,10 @@ select {
     padding-top: 1.25rem;
     padding-bottom: 0;
     gap: 0.5rem;
+  }
+
+  .site-footer small {
+    text-align: center;
   }
 
   .landing-section--slide {

@@ -8,17 +8,11 @@ export interface Props {
 
 const { brand } = Astro.props;
 const currentYear = new Date().getFullYear();
-const brandSubtitle = [brand.teacherName, brand.subject].filter(Boolean).join(' ');
+const footerLabel = [brand.teacherName, brand.subject].filter(Boolean).join('');
 ---
 
 <footer class="site-footer">
   <Container class="site-footer__inner">
-    <div class="site-footer__brand">
-      <strong>{brand.brandName}</strong>
-      {brandSubtitle && (
-        <small class="site-footer__brand-subtitle">{brandSubtitle}</small>
-      )}
-    </div>
-    <small>{currentYear} Dococo landing template</small>
+    <small>{currentYear} {footerLabel || brand.brandName}</small>
   </Container>
 </footer>
