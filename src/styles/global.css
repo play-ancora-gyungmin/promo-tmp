@@ -177,7 +177,7 @@ select {
 }
 
 .landing-deck__continuum > .landing-section + .landing-section {
-  border-top: 1px solid var(--line-color);
+  border-top: 0;
 }
 
 .container {
@@ -474,10 +474,7 @@ select {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-top: 1px solid var(--line-color);
-  border-right: 0;
-  border-bottom: 1px solid var(--line-color);
-  border-left: 0;
+  border: 0;
   background: var(--panel-bg);
 }
 
@@ -568,6 +565,7 @@ select {
     radial-gradient(circle at 88% 20%, rgba(111, 161, 222, 0.28), transparent 30%),
     linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(239, 245, 255, 0.78));
   align-items: stretch;
+  border-bottom: 1px solid var(--line-color);
   overflow: clip;
 }
 
@@ -1719,21 +1717,19 @@ select {
   }
 
   .landing-section--slide {
-    min-height: 100vh;
-    min-height: 100svh;
-    min-height: 100dvh;
+    min-height: auto;
+    height: auto;
   }
 
+  .landing-section__surface,
   .landing-section--slide .landing-section__surface {
-    min-height: 100vh;
-    min-height: 100svh;
-    min-height: 100dvh;
+    min-height: auto;
+    height: auto;
   }
 
   .section-shell {
-    min-height: 100vh;
-    min-height: 100svh;
-    min-height: 100dvh;
+    min-height: auto;
+    height: auto;
     padding: 1.5rem;
     padding-top: 1.5rem;
     padding-bottom: max(
