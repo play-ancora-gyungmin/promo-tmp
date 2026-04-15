@@ -6,6 +6,7 @@ import CurriculumSection from './CurriculumSection.astro';
 import HeroSection from './HeroSection.astro';
 import ProofSection from './ProofSection.astro';
 import ScoreProofSection from './ScoreProofSection.astro';
+import TeachingMaterialsSection from './TeachingMaterialsSection.astro';
 import TeacherIntroSection from './TeacherIntroSection.astro';
 
 export interface Props {
@@ -35,6 +36,8 @@ const nonHeroSections = sections.filter((section) => section.type !== 'hero');
       {nonHeroSections.map((section) => (
         section.type === 'scoreProof' ? (
           <ScoreProofSection section={section} landing={landing} />
+        ) : section.type === 'teachingMaterials' ? (
+          <TeachingMaterialsSection section={section} landing={landing} />
         ) : section.type === 'proof' ? (
           <ProofSection section={section} landing={landing} />
         ) : section.type === 'teacherIntro' ? (

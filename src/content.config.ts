@@ -94,6 +94,20 @@ const teachers = defineCollection({
         schools: z.array(scoreProofSchoolSchema).optional(),
         highlights: z.array(z.string()).optional()
       }).partial().optional(),
+      teachingMaterials: z.object({
+        eyebrow: z.string().optional(),
+        title: z.string(),
+        description: z.string(),
+        points: z.array(z.string()).optional(),
+        books: z.array(
+          z.object({
+            image: image(),
+            alt: z.string(),
+            label: z.string().optional()
+          })
+        ),
+        note: z.string().optional()
+      }).optional(),
       proof: z.object({
         title: z.string(),
         reviews: z.array(

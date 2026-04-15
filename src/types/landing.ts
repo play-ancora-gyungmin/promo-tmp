@@ -91,6 +91,12 @@ export interface CurriculumItem {
   steps?: CurriculumStep[];
 }
 
+export interface TeachingMaterialBook {
+  image: ImageMetadata;
+  alt: string;
+  label?: string;
+}
+
 export interface LandingData {
   brand?: {
     teacherName?: string;
@@ -139,6 +145,14 @@ export interface LandingData {
     stats?: ScoreProofStat[];
     schools?: ScoreProofSchool[];
     highlights?: string[];
+  };
+  teachingMaterials?: {
+    eyebrow?: string;
+    title: string;
+    description: string;
+    points?: string[];
+    books: TeachingMaterialBook[];
+    note?: string;
   };
   proof?: {
     title?: string;

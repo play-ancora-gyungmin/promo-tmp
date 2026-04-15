@@ -164,6 +164,37 @@
       }
     ]
   },
+  "teachingMaterials": {
+    "title": "어디서도 볼 수 없는 '고퀄리티 자체 교재'",
+    "description": "시중 자료로는 채울 수 없는 학교별 특성, 서하늘 영어가 직접 만든 교재로 해결합니다. 학생들은 오로지 학습에만 집중할 수 있도록 준비합니다.",
+    "books": [
+      {
+        "image": "../../assets/images/books/seo-haneul-material-hanbatgo-1-midterm.jpg",
+        "alt": "한밭고 1학년 2025년 1학기 중간고사 3과와 부교재를 담은 서하늘 영어 자체교재 표지",
+        "label": "한밭고1 중간 3과 + 부교재"
+      },
+      {
+        "image": "../../assets/images/books/seo-haneul-material-yuseonggo-2-weekly.jpg",
+        "alt": "유성고 2학년 수능특강 1주차 주간지용 서하늘 영어 자체교재 표지",
+        "label": "유성고2 수능특강 주간지"
+      },
+      {
+        "image": "../../assets/images/books/seo-haneul-material-daejeongo-2-past-exams.png",
+        "alt": "대전여고 2학년 중간 대비 기출 N제를 담은 서하늘 영어 자체교재 표지",
+        "label": "대전여고2 기출 N제"
+      },
+      {
+        "image": "../../assets/images/books/seo-haneul-material-samcheon-2-midterm.png",
+        "alt": "삼천중 2학년 2025년 2학기 중간고사 대비 서하늘 영어 자체교재 표지",
+        "label": "삼천중2 중간고사"
+      },
+      {
+        "image": "../../assets/images/books/seo-haneul-material-dunsanyeogo-1-lesson-1.png",
+        "alt": "둔산여고 1학년 YBM 박 교과서 Lesson 1 대비 서하늘 영어 자체교재 표지",
+        "label": "둔산여고1 Lesson 1"
+      }
+    ]
+  },
   "proof": {
     "title": "영어 성적 상승, 학생들의 후기로 증명합니다.",
     "reviews": [

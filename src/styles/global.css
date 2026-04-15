@@ -1145,6 +1145,96 @@ select {
   background: #6d88b6;
 }
 
+.teaching-materials-section__surface .section-shell {
+  padding-block: clamp(3rem, 6vw, 5rem);
+}
+
+.teaching-materials-section__container {
+  display: grid;
+}
+
+.teaching-materials-section__grid {
+  display: grid;
+  gap: clamp(1.8rem, 3vw, 2.8rem);
+}
+
+.teaching-materials-section__header {
+  display: grid;
+  gap: clamp(0.85rem, 1.8vw, 1.1rem);
+  justify-items: center;
+  text-align: center;
+}
+
+.teaching-materials-section__headline {
+  max-width: 13ch;
+  margin: 0;
+  color: #183a6a;
+  font-family: "A2Z", "Pretendard", sans-serif;
+  font-size: clamp(2.1rem, 4.6vw, 3.8rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+}
+
+.teaching-materials-section__description {
+  max-width: 46rem;
+  margin: 0;
+  color: #43536e;
+  font-size: clamp(1rem, 1.55vw, 1.08rem);
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  line-height: 1.75;
+}
+
+.teaching-materials-section__gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+  gap: clamp(0.85rem, 1.8vw, 1.15rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  justify-content: center;
+}
+
+.teaching-materials-section__book {
+  min-width: 0;
+}
+
+.teaching-materials-section__card {
+  position: relative;
+  height: 100%;
+  padding: 0.58rem;
+  border: 1px solid rgba(112, 138, 181, 0.2);
+  border-radius: 1.15rem;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 10px 24px rgba(77, 102, 141, 0.1);
+}
+
+.teaching-materials-section__card-label {
+  position: absolute;
+  top: 0.92rem;
+  left: 0.92rem;
+  z-index: 1;
+  margin: 0;
+  padding: 0.44rem 0.66rem;
+  border: 1px solid rgba(112, 138, 181, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #496488;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.teaching-materials-section__image,
+.teaching-materials-section__image img {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 0.72rem;
+}
+
 .proof-section__surface .section-shell {
   padding-block: clamp(3rem, 6vw, 5rem);
 }
@@ -1349,6 +1439,26 @@ select {
 
   .curriculum-section__timeline {
     grid-row: auto;
+  }
+
+  .teaching-materials-section__headline {
+    max-width: 15ch;
+  }
+}
+
+@media (min-width: 720px) {
+  .teaching-materials-section__gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 860px) {
+  .teaching-materials-section__gallery {
+    grid-template-columns: repeat(5, minmax(0, 11.6rem));
+    width: min(100%, 80rem);
+    max-width: 80rem;
+    gap: clamp(1rem, 1.5vw, 1.35rem);
+    margin-inline: auto;
   }
 }
 
@@ -1581,6 +1691,42 @@ select {
 
   .score-proof-section__highlight {
     width: 100%;
+  }
+
+  .teaching-materials-section__surface .section-shell {
+    padding-block: 2.5rem max(
+      1.5rem,
+      calc(var(--header-height) + env(safe-area-inset-bottom) + 0.875rem)
+    );
+  }
+
+  .teaching-materials-section__grid {
+    gap: 1.35rem;
+  }
+
+  .teaching-materials-section__headline {
+    max-width: 12ch;
+    font-size: clamp(1.9rem, 7vw, 2.65rem);
+  }
+
+  .teaching-materials-section__description {
+    font-size: 0.98rem;
+    line-height: 1.7;
+  }
+
+  .teaching-materials-section__gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .teaching-materials-section__card {
+    padding: 0.38rem;
+  }
+
+  .teaching-materials-section__card-label {
+    top: 0.66rem;
+    left: 0.66rem;
+    font-size: 0.64rem;
   }
 
   .proof-section__surface .section-shell {

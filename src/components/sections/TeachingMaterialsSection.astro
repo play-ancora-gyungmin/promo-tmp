@@ -1,0 +1,72 @@
+---
+import { Picture } from 'astro:assets';
+import type { LandingData, LandingSectionConfig } from '../../types/landing';
+import Container from '../layout/Container.astro';
+import SectionShell from '../layout/SectionShell.astro';
+
+export interface Props {
+  section: LandingSectionConfig;
+  landing: LandingData;
+}
+
+const { section, landing } = Astro.props;
+const teachingMaterials = landing.teachingMaterials;
+const title = teachingMaterials?.title?.trim();
+const description = teachingMaterials?.description?.trim();
+const books =
+  teachingMaterials?.books?.flatMap((book) => {
+    const alt = book.alt?.trim();
+
+    return book.image && alt
+      ? [
+          {
+            image: book.image,
+            alt,
+            label: book.label?.trim()
+          }
+        ]
+      : [];
+  }) ?? [];
+const hasContent = Boolean(title && description && books.length);
+---
+
+{
+  hasContent ? (
+    <SectionShell
+      id={section.id}
+      kind={section.kind}
+      class="teaching-materials-section"
+      surfaceClass="teaching-materials-section__surface"
+    >
+      <Container class="teaching-materials-section__container">
+        <div class="teaching-materials-section__grid">
+          <div class="teaching-materials-section__header">
+            <h2 class="teaching-materials-section__headline">{title}</h2>
+            <p class="teaching-materials-section__description">{description}</p>
+          </div>
+          <ul class="teaching-materials-section__gallery" aria-label="서하늘 영어 자체교재 표지">
+            {books.map((book) => (
+              <li class="teaching-materials-section__book">
+                <article class="teaching-materials-section__card">
+                  {book.label ? (
+                    <p class="teaching-materials-section__card-label">{book.label}</p>
+                  ) : null}
+                  <Picture
+                    src={book.image}
+                    alt={book.alt}
+                    class="teaching-materials-section__image"
+                    formats={['avif', 'webp']}
+                    fallbackFormat="png"
+                    layout="constrained"
+                    widths={[320, 480, 640, 820]}
+                    sizes="(min-width: 1440px) 15rem, (min-width: 1024px) 14rem, (min-width: 860px) 17vw, (min-width: 720px) 18vw, 44vw"
+                  />
+                </article>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Container>
+    </SectionShell>
+  ) : null
+}
