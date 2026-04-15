@@ -858,7 +858,7 @@ select {
   margin-inline: calc(50% - 50vw);
   display: grid;
   gap: clamp(1.25rem, 2.8vw, 1.9rem);
-  padding-inline: clamp(1rem, 3vw, 2rem);
+  padding-inline: 0;
   padding-block: clamp(0.75rem, 1.8vw, 1rem);
   overflow-x: hidden;
   overflow-y: visible;
@@ -1143,7 +1143,7 @@ select {
   .proof-section__marquee {
     margin-top: 0.85rem;
     gap: 1rem;
-    padding-inline: 1rem;
+    padding-inline: 0;
     padding-block: 0.7rem;
     overflow-x: hidden;
     overflow-y: visible;
