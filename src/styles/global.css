@@ -1743,12 +1743,34 @@ select {
   }
 
   .hero-section__headline {
-    font-size: clamp(2.65rem, 14vw, 4.2rem);
+    font-size: clamp(2.3rem, 12.2vw, 3.7rem);
+  }
+
+  .hero-section__headline-emphasis {
+    font-size: 1.22em;
+  }
+
+  .hero-section__eyebrow {
+    font-size: 0.7rem;
+  }
+
+  .hero-section__eyebrow-subject {
+    font-size: 0.88rem;
   }
 
   .hero-section__subheadline {
     max-width: none;
-    font-size: 1rem;
+    font-size: 0.94rem;
+    line-height: 1.62;
+  }
+
+  .hero-section__point {
+    min-height: 2.5rem;
+    font-size: 0.88rem;
+  }
+
+  .hero-section__actions .app-button {
+    font-size: 0.94rem;
   }
 
   .hero-section__actions {
@@ -1766,26 +1788,23 @@ select {
       calc(var(--header-height) + env(safe-area-inset-bottom) + 0.875rem)
     );
     --hero-visible-ratio: 0.74;
-    --hero-portrait-scale: 1.48;
-    --hero-portrait-frame-width: clamp(15.5rem, 78vw, 18.5rem);
+    --hero-portrait-scale: 1.42;
+    --hero-portrait-frame-width: clamp(14.25rem, 72vw, 17.25rem);
     padding-bottom: var(--hero-visual-bottom-shift);
   }
 
   .hero-section__visual {
-    min-height: 18rem;
+    align-items: flex-start;
+    min-height: 16.75rem;
+    padding-top: 0.35rem;
+  }
+
+  .hero-section__visual-frame {
+    margin-top: 0;
   }
 
   .teacher-intro-section__visual {
-    min-height: auto;
-    padding: 0.5rem 0.25rem 0;
-  }
-
-  .teacher-intro-section__visual-backdrop {
-    width: min(100%, 15rem);
-  }
-
-  .teacher-intro-section__photo-frame {
-    width: min(100%, 12.6rem);
+    display: none;
   }
 
   .teacher-intro-section__content-panel {
