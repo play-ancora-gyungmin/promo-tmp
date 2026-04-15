@@ -39,6 +39,8 @@ export interface LandingSectionConfig {
   enabled?: boolean;
   label?: string;
   kind?: LandingSectionKind;
+  variant?: string;
+  contentKey?: string;
 }
 
 const defaultSectionKinds: Partial<
@@ -58,6 +60,21 @@ export const defaultSections: LandingSectionConfig[] = defaultSectionOrder.map(
 export interface LandingCta {
   label?: string;
   href?: string;
+}
+
+export interface LandingProofReview {
+  quote?: string;
+  name?: string;
+  alt?: string;
+  caption?: string;
+  image?: ImageMetadata;
+}
+
+export interface LandingProofBlock {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  reviews?: LandingProofReview[];
 }
 
 export interface ContactField {
@@ -113,15 +130,8 @@ export interface LandingData {
     items?: string[];
     image?: ImageMetadata;
   };
-  proof?: {
-    title?: string;
-    reviews?: Array<{
-      quote?: string;
-      name?: string;
-      alt?: string;
-      image?: ImageMetadata;
-    }>;
-  };
+  proof?: LandingProofBlock;
+  proofBlocks?: Record<string, LandingProofBlock>;
   faq?: Array<{
     question?: string;
     answer?: string;
