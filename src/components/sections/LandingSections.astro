@@ -3,6 +3,7 @@ import type { LandingData } from '../../types/landing';
 import { getLandingSkeletonSections } from '../../lib/landing/getLandingSkeletonSections';
 import SectionShell from '../layout/SectionShell.astro';
 import CurriculumSection from './CurriculumSection.astro';
+import ContactSection from './ContactSection.astro';
 import HeroSection from './HeroSection.astro';
 import ProofSection from './ProofSection.astro';
 import ScoreProofSection from './ScoreProofSection.astro';
@@ -48,6 +49,8 @@ const nonHeroSections = sections.filter((section) => section.type !== 'hero');
             landing={landing}
             curriculumIndex={curriculumIndex++}
           />
+        ) : section.type === 'contact' ? (
+          <ContactSection section={section} landing={landing} />
         ) : (
           <SectionShell id={section.id} kind={section.kind}>
             <span class="landing-placeholder-label">{section.label}</span>

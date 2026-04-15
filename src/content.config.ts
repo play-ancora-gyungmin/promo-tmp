@@ -16,6 +16,12 @@ const contactFieldSchema = z.object({
   required: z.boolean().optional()
 }).partial();
 
+const contactChannelSchema = z.object({
+  kind: z.enum(['kakao', 'instagram', 'website', 'blog', 'band']),
+  label: z.string(),
+  href: z.string()
+});
+
 const scoreProofStatSchema = z.object({
   value: z.string().optional(),
   label: z.string().optional(),
@@ -128,6 +134,9 @@ const teachers = defineCollection({
       contact: z.object({
         title: z.string(),
         description: z.string(),
+        address: z.string(),
+        phone: z.string(),
+        channels: z.array(contactChannelSchema).optional(),
         fields: z.array(contactFieldSchema).optional()
       }).partial().optional(),
       sections: z.array(

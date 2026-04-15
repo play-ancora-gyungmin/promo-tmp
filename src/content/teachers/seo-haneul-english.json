@@ -255,27 +255,34 @@
     }
   ],
   "contact": {
-    "title": "문의 폼 섹션 자리",
-    "description": "폼 UI와 인터랙션은 다음 단계에서 구현합니다.",
-    "fields": [
+    "title": "문의",
+    "address": "(35241) 대전시 서구 둔산로 134, 아베스빌딩",
+    "phone": "042-488-1211",
+    "channels": [
       {
-        "name": "studentName",
-        "label": "학생 이름",
-        "type": "text",
-        "placeholder": "홍길동",
-        "required": true
+        "kind": "kakao",
+        "label": "카카오톡",
+        "href": "https://pf.kakao.com/_uDqsn"
       },
       {
-        "name": "parentPhone",
-        "label": "보호자 연락처",
-        "type": "tel",
-        "placeholder": "010-0000-0000"
+        "kind": "instagram",
+        "label": "인스타그램",
+        "href": "https://www.instagram.com/sskyy_t/"
       },
       {
-        "name": "notes",
-        "label": "문의 내용",
-        "type": "textarea",
-        "placeholder": "관심 과정이나 상담 희망 내용을 남겨주세요."
+        "kind": "website",
+        "label": "모티브에듀학원 사이트",
+        "href": "https://motiveedu.co.kr/"
+      },
+      {
+        "kind": "blog",
+        "label": "학원 블로그",
+        "href": "https://blog.naver.com/motiveedu_"
+      },
+      {
+        "kind": "band",
+        "label": "학원 밴드",
+        "href": "https://www.band.us/@motiveedu"
       }
     ]
   },

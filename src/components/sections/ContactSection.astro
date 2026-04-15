@@ -1,0 +1,113 @@
+---
+import type { ContactChannel, LandingData, LandingSectionConfig } from '../../types/landing';
+import bandIcon from '../../assets/icons/contact/band.svg';
+import instagramIcon from '../../assets/icons/contact/instagram.png';
+import kakaoIcon from '../../assets/icons/contact/kakao.svg';
+import naverBlogIcon from '../../assets/icons/contact/naver-blog.svg';
+import Container from '../layout/Container.astro';
+import SectionShell from '../layout/SectionShell.astro';
+
+export interface Props {
+  section: LandingSectionConfig;
+  landing: LandingData;
+}
+
+const { section, landing } = Astro.props;
+const contact = landing.contact;
+const title = contact?.title?.trim() || '문의';
+const phone = contact?.phone?.trim();
+const address = contact?.address?.trim();
+const telHref = phone ? `tel:${phone.replace(/[^\d+]/g, '')}` : undefined;
+const channels =
+  contact?.channels?.flatMap((channel) => {
+    const kind = channel.kind;
+    const label = channel.label?.trim();
+    const href = channel.href?.trim();
+
+    return kind && label && href
+      ? [
+          {
+            kind,
+            label,
+            href
+          }
+        ]
+      : [];
+  }) ?? [];
+
+type IconChannelKind = Exclude<NonNullable<ContactChannel['kind']>, 'website'>;
+
+const iconUrls: Record<IconChannelKind, string> = {
+  kakao: kakaoIcon.src,
+  instagram: instagramIcon.src,
+  blog: naverBlogIcon.src,
+  band: bandIcon.src
+};
+
+const iconChannels = channels.filter(
+  (channel): channel is { kind: IconChannelKind; label: string; href: string } =>
+    channel.kind !== 'website'
+);
+const websiteChannels = channels.filter((channel) => channel.kind === 'website');
+---
+
+<SectionShell
+  id={section.id}
+  kind={section.kind}
+  class="contact-section"
+  surfaceClass="contact-section__surface"
+>
+  <Container class="contact-section__container">
+    <div class="contact-section__grid">
+      <div class="contact-section__content">
+        <h2 class="contact-section__title">{title}</h2>
+
+        <div class="contact-section__info">
+          {phone && telHref ? (
+            <a class="contact-section__phone" href={telHref}>
+              {phone}
+            </a>
+          ) : null}
+          {address ? <p class="contact-section__address">{address}</p> : null}
+        </div>
+
+        {
+          iconChannels.length ? (
+            <div class="contact-section__links" aria-label="문의 채널">
+              {iconChannels.map((channel) => (
+                <a
+                  class="contact-section__icon-link"
+                  href={channel.href}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label={channel.label}
+                >
+                  <img src={iconUrls[channel.kind]} alt="" loading="lazy" />
+                </a>
+              ))}
+            </div>
+          ) : null
+        }
+
+        {
+          websiteChannels.length ? (
+            <div class="contact-section__website-links">
+              {websiteChannels.map((channel) => (
+                <a
+                  class="contact-section__text-link"
+                  href={channel.href}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  {channel.label}
+                </a>
+              ))}
+            </div>
+          ) : null
+        }
+      </div>
+
+      <div class="contact-section__map" aria-hidden="true"></div>
+    </div>
+  </Container>
+</SectionShell>

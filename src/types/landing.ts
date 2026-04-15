@@ -68,6 +68,12 @@ export interface ContactField {
   required?: boolean;
 }
 
+export interface ContactChannel {
+  kind?: "kakao" | "instagram" | "website" | "blog" | "band";
+  label?: string;
+  href?: string;
+}
+
 export interface ScoreProofStat {
   value?: string;
   label?: string;
@@ -170,6 +176,9 @@ export interface LandingData {
   contact?: {
     title?: string;
     description?: string;
+    address?: string;
+    phone?: string;
+    channels?: ContactChannel[];
     fields?: ContactField[];
   };
   theme?: {
