@@ -56,6 +56,62 @@
     ],
     "image": "../../assets/images/teachers/seo-haneul-hero.png"
   },
+  "scoreProof": {
+    "eyebrow": "2025 서하늘영어 실적",
+    "title": "역대급 실적으로 증명합니다",
+    "stats": [
+      {
+        "value": "28명",
+        "label": "2025 영어 100점"
+      },
+      {
+        "value": "102명",
+        "label": "2025 영어 1등급"
+      }
+    ],
+    "schools": [
+      {
+        "name": "대전여고",
+        "achievements": [
+          "1·2·3학년 100점 배출",
+          "3년 연속 영어 100점 배출",
+          "1학년 2학기 통합 전교 1등·3등 배출",
+          "2학년 3연속 100점 배출",
+          "2025 대전여고 1등급 누적 31명"
+        ]
+      },
+      {
+        "name": "한밭고",
+        "achievements": [
+          "1·2·3학년 영어 전교 1등 배출",
+          "2학년 영어 전교 1·2·3등 배출",
+          "2학년 모든 시험 전교 1등 배출",
+          "1학년 1학기 통합 전교 1등 배출",
+          "2025 한밭고 1등급 누적 38명"
+        ]
+      },
+      {
+        "name": "둔산여고",
+        "achievements": [
+          "3년 연속 영어 100점 배출",
+          "1학년 1학기·2학기 100점 배출",
+          "2학년 2학기 100점 2명 배출",
+          "2학년 2학기 1등급 10명 중 4명 배출",
+          "2025 둔산여고 1등급 누적 20명"
+        ]
+      },
+      {
+        "name": "유성고",
+        "achievements": [
+          "1학년 1학기·2학기 100점 배출",
+          "2학년 2학기 영어 전교 2등 배출",
+          "2학년 1학기 1등급 5명 배출",
+          "2학년 2학기 재원생 80% 90점대",
+          "2025 유성고 1등급 누적 13명"
+        ]
+      }
+    ]
+  },
   "proof": {
     "title": "영어 성적 상승, 학생들의 후기로 증명합니다.",
     "reviews": [
@@ -146,6 +202,7 @@
   "enabledSections": [
     "hero",
     "teacherIntro",
+    "scoreProof",
     "proof",
     "curriculum",
     "teachingMaterials",
@@ -154,6 +211,7 @@
   "sectionOrder": [
     "hero",
     "teacherIntro",
+    "scoreProof",
     "proof",
     "curriculum",
     "teachingMaterials",

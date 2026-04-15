@@ -1,0 +1,117 @@
+---
+import type { LandingData, LandingSectionConfig } from '../../types/landing';
+import Container from '../layout/Container.astro';
+import SectionShell from '../layout/SectionShell.astro';
+
+export interface Props {
+  section: LandingSectionConfig;
+  landing: LandingData;
+}
+
+const { section, landing } = Astro.props;
+const scoreProof = landing.scoreProof;
+const eyebrow = scoreProof?.eyebrow?.trim();
+const title = scoreProof?.title?.trim() || '후기 전에 먼저 확인하는 실제 성과';
+const description = scoreProof?.description?.trim();
+const stats =
+  scoreProof?.stats?.flatMap((stat) => {
+    const value = stat.value?.trim();
+    const label = stat.label?.trim();
+    const detail = stat.detail?.trim();
+
+    return value || label || detail
+      ? [
+          {
+            value,
+            label,
+            detail
+          }
+        ]
+      : [];
+  }) ?? [];
+const schools =
+  scoreProof?.schools?.flatMap((school) => {
+    const name = school.name?.trim();
+    const achievements = school.achievements?.map((item) => item.trim()).filter(Boolean) ?? [];
+
+    return name || achievements.length
+      ? [
+          {
+            name,
+            achievements
+          }
+        ]
+      : [];
+  }) ?? [];
+const highlights =
+  scoreProof?.highlights?.map((item) => item.trim()).filter(Boolean) ?? [];
+const hasContent = Boolean(scoreProof) && Boolean(
+  eyebrow || title || description || stats.length || schools.length || highlights.length
+);
+---
+
+{
+  hasContent ? (
+    <SectionShell
+      id={section.id}
+      kind={section.kind}
+      class="score-proof-section"
+      surfaceClass="score-proof-section__surface"
+    >
+      <Container class="score-proof-section__container">
+        <div class="score-proof-section__heading">
+          {eyebrow ? <p class="score-proof-section__eyebrow">{eyebrow}</p> : null}
+          <h2 class="score-proof-section__headline">{title}</h2>
+          {description ? <p class="score-proof-section__description">{description}</p> : null}
+        </div>
+
+        {
+          stats.length ? (
+            <div class="score-proof-section__stats" aria-label="2025 주요 실적">
+              {stats.map((stat) => (
+                <p class="score-proof-section__stat-line">
+                  {stat.label ? <span class="score-proof-section__stat-label">{stat.label}</span> : null}
+                  {stat.value ? <strong class="score-proof-section__stat-value">{stat.value}</strong> : null}
+                </p>
+              ))}
+            </div>
+          ) : null
+        }
+
+        {
+          schools.length ? (
+            <div class="score-proof-section__schools">
+              {schools.map((school) => (
+                <article class="score-proof-section__school-card">
+                  {school.name ? <h3 class="score-proof-section__school-name">{school.name}</h3> : null}
+                  {
+                    school.achievements.length ? (
+                      <ul class="score-proof-section__school-list">
+                        {school.achievements.map((item) => (
+                          <li class="score-proof-section__school-item">
+                            <span class="score-proof-section__school-item-marker" aria-hidden="true"></span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null
+                  }
+                </article>
+              ))}
+            </div>
+          ) : null
+        }
+
+        {
+          highlights.length ? (
+            <ul class="score-proof-section__highlights" aria-label="성과 요약">
+              {highlights.map((item) => (
+                <li class="score-proof-section__highlight">{item}</li>
+              ))}
+            </ul>
+          ) : null
+        }
+      </Container>
+    </SectionShell>
+  ) : null
+}

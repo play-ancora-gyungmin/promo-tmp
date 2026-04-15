@@ -813,6 +813,193 @@ select {
   background: linear-gradient(135deg, #4b79b8, #7b63cb);
 }
 
+.score-proof-section__surface {
+  background:
+    radial-gradient(circle at 14% 20%, rgba(196, 220, 255, 0.42), transparent 28%),
+    radial-gradient(circle at 86% 18%, rgba(212, 198, 255, 0.34), transparent 24%),
+    linear-gradient(180deg, rgba(251, 253, 255, 0.96), rgba(242, 247, 255, 0.92));
+  border-top: 1px solid rgba(54, 93, 150, 0.1);
+}
+
+.score-proof-section__surface .section-shell {
+  padding-block: clamp(3rem, 6vw, 5rem);
+}
+
+.score-proof-section__container {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.score-proof-section__heading {
+  display: grid;
+  gap: 0.8rem;
+  max-width: 44rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.score-proof-section__eyebrow {
+  margin: 0;
+  color: #365d96;
+  font-size: clamp(1.29rem, 2.7vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+
+.score-proof-section__headline {
+  margin: 0;
+  color: #183a6a;
+  font-family: "A2Z", "Pretendard", sans-serif;
+  font-size: clamp(2.15rem, 4.5vw, 3.75rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+.score-proof-section__description {
+  margin: 0;
+  color: #445066;
+  font-size: clamp(1rem, 1.4vw, 1.12rem);
+  font-weight: 500;
+  line-height: 1.75;
+}
+
+.score-proof-section__stats {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: clamp(2rem, 6vw, 5rem);
+  flex-wrap: wrap;
+}
+
+.score-proof-section__stat-line {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  margin: 0;
+  padding-bottom: 0.85rem;
+  border-bottom: 2px solid rgba(54, 93, 150, 0.22);
+  color: #22324a;
+  font-size: clamp(1.9rem, 3.8vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  white-space: nowrap;
+}
+
+.score-proof-section__stat-value {
+  color: #234777;
+  font-family: "A2Z", "Pretendard", sans-serif;
+  font-size: clamp(2.8rem, 5.6vw, 4.9rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+}
+
+.score-proof-section__stat-label,
+.score-proof-section__stat-detail {
+  margin: 0;
+}
+
+.score-proof-section__stat-label {
+  color: #22324a;
+  font-size: inherit;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: inherit;
+}
+
+.score-proof-section__stat-detail {
+  color: #5a677d;
+  font-size: 0.96rem;
+  font-weight: 500;
+  line-height: 1.65;
+}
+
+.score-proof-section__highlights {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.score-proof-section__highlight {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.8rem 1.1rem;
+  border: 1px solid rgba(78, 110, 161, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.8);
+  color: #31435e;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+.score-proof-section__schools {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 1rem;
+}
+
+.score-proof-section__school-card {
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1.2rem, 2vw, 1.6rem);
+  border: 1px solid rgba(78, 110, 161, 0.14);
+  border-radius: 1.4rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(246, 249, 255, 0.92)),
+    rgba(255, 255, 255, 0.88);
+  box-shadow:
+    0 18px 34px rgba(77, 104, 149, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.66);
+}
+
+.score-proof-section__school-name {
+  margin: 0;
+  color: #183a6a;
+  font-family: "A2Z", "Pretendard", sans-serif;
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.score-proof-section__school-list {
+  display: grid;
+  gap: 0.8rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.score-proof-section__school-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.65rem;
+  align-items: start;
+  color: #30415d;
+  font-size: 0.96rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.55;
+}
+
+.score-proof-section__school-item-marker {
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-top: 0.46rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #4b79b8, #7b63cb);
+}
+
 .proof-section__surface {
   background:
     radial-gradient(circle at 18% 22%, rgba(201, 220, 255, 0.42), transparent 30%),
@@ -1127,6 +1314,33 @@ select {
     gap: 0.75rem;
     padding: 0.95rem 0;
     font-size: 0.98rem;
+  }
+
+  .score-proof-section__surface .section-shell {
+    padding-block: 2.5rem max(
+      1.5rem,
+      calc(var(--header-height) + env(safe-area-inset-bottom) + 0.875rem)
+    );
+  }
+
+  .score-proof-section__headline {
+    font-size: clamp(1.9rem, 7.4vw, 2.7rem);
+  }
+
+  .score-proof-section__stats {
+    gap: 1rem 1.6rem;
+  }
+
+  .score-proof-section__schools {
+    gap: 0.85rem;
+  }
+
+  .score-proof-section__school-card {
+    padding: 1.15rem;
+  }
+
+  .score-proof-section__highlight {
+    width: 100%;
   }
 
   .proof-section__surface .section-shell {

@@ -68,6 +68,17 @@ export interface ContactField {
   required?: boolean;
 }
 
+export interface ScoreProofStat {
+  value?: string;
+  label?: string;
+  detail?: string;
+}
+
+export interface ScoreProofSchool {
+  name?: string;
+  achievements?: string[];
+}
+
 export interface LandingData {
   brand?: {
     teacherName?: string;
@@ -112,6 +123,14 @@ export interface LandingData {
     body?: string;
     items?: string[];
     image?: ImageMetadata;
+  };
+  scoreProof?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    stats?: ScoreProofStat[];
+    schools?: ScoreProofSchool[];
+    highlights?: string[];
   };
   proof?: {
     title?: string;

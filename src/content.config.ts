@@ -16,6 +16,17 @@ const contactFieldSchema = z.object({
   required: z.boolean().optional()
 }).partial();
 
+const scoreProofStatSchema = z.object({
+  value: z.string().optional(),
+  label: z.string().optional(),
+  detail: z.string().optional()
+}).partial();
+
+const scoreProofSchoolSchema = z.object({
+  name: z.string().optional(),
+  achievements: z.array(z.string()).optional()
+}).partial();
+
 const teachers = defineCollection({
   loader: glob({
     base: './src/content/teachers',
@@ -68,6 +79,14 @@ const teachers = defineCollection({
         body: z.string(),
         items: z.array(z.string()).optional(),
         image: image().optional()
+      }).partial().optional(),
+      scoreProof: z.object({
+        eyebrow: z.string().optional(),
+        title: z.string().optional(),
+        description: z.string().optional(),
+        stats: z.array(scoreProofStatSchema).optional(),
+        schools: z.array(scoreProofSchoolSchema).optional(),
+        highlights: z.array(z.string()).optional()
       }).partial().optional(),
       proof: z.object({
         title: z.string(),
