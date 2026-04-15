@@ -392,10 +392,12 @@ select {
 
 .hero-section__surface {
   --hero-visual-bottom-shift: 0px;
+  --hero-visual-top-margin: 0px;
   --hero-image-aspect-ratio: 0.8;
   --hero-visible-ratio: 0.6;
   --hero-portrait-scale: 2;
   --hero-portrait-frame-width: clamp(18rem, 27vw, 28rem);
+  --hero-portrait-frame-scale: 1.4;
   background:
     radial-gradient(circle at 16% 18%, rgba(188, 167, 255, 0.26), transparent 34%),
     radial-gradient(circle at 88% 20%, rgba(111, 161, 222, 0.28), transparent 30%),
@@ -604,6 +606,7 @@ select {
 .hero-section__visual {
   position: relative;
   display: flex;
+  z-index: 2;
   align-self: stretch;
   align-items: flex-end;
   justify-content: center;
@@ -626,11 +629,8 @@ select {
 
 .hero-section__visual-frame {
   position: relative;
-  width: min(100%, var(--hero-portrait-frame-width));
-  aspect-ratio: calc(
-    var(--hero-image-aspect-ratio) /
-    (var(--hero-visible-ratio) * var(--hero-portrait-scale))
-  );
+  width: min(100%, calc(var(--hero-portrait-frame-width) * var(--hero-portrait-frame-scale)));
+  aspect-ratio: calc(var(--hero-image-aspect-ratio) / var(--hero-visible-ratio));
   margin-top: auto;
   overflow: hidden;
 }
@@ -663,24 +663,62 @@ select {
 .hero-section__portrait {
   position: absolute;
   top: 0;
-  left: 50%;
+  left: 0;
   z-index: 1;
-  width: calc(100% * var(--hero-portrait-scale));
-  max-width: none;
+  width: 100%;
+  max-width: 100%;
   height: auto;
-  transform: translateX(-50%);
   filter: none;
 }
 
 .hero-section__portrait img {
   width: 100%;
-  max-width: none;
+  max-width: 100%;
   height: auto;
 }
 
 @media (min-width: 1025px) {
+  .hero-section__surface {
+    --hero-visual-top-margin: clamp(1rem, 4vh, 2.75rem);
+    min-height: 100vh;
+    min-height: 100svh;
+    min-height: 100dvh;
+    height: 100vh;
+    height: 100svh;
+    height: 100dvh;
+  }
+
+  .hero-section__surface .section-shell {
+    min-height: 100vh;
+    min-height: 100svh;
+    min-height: 100dvh;
+    height: 100vh;
+    height: 100svh;
+    height: 100dvh;
+  }
+
   .hero-section__grid {
     grid-template-columns: minmax(0, 1.1fr) minmax(23rem, 0.9fr);
+    gap: 0;
+  }
+
+  .hero-section__visual {
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-top: var(--hero-visual-top-margin);
+  }
+
+  .hero-section__visual-frame {
+    height: 0;
+    margin-top: 0;
+    aspect-ratio: auto;
+    overflow: visible;
+    transform: translateX(-10%);
+  }
+
+  .hero-section__portrait {
+    position: absolute;
+    top: 0;
   }
 }
 
