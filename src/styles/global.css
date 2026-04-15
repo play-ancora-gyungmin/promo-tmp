@@ -1807,8 +1807,20 @@ select {
     display: none;
   }
 
+  .teacher-intro-section__surface .section-shell,
+  .teacher-intro-section__grid,
+  .teacher-intro-section__content {
+    align-items: flex-start;
+  }
+
+  .teacher-intro-section__surface .section-shell,
+  .teacher-intro-section__content {
+    justify-content: flex-start;
+  }
+
   .teacher-intro-section__content-panel {
     padding: 0;
+    margin-top: 4rem;
   }
 
   .teacher-intro-section__name {
