@@ -12,6 +12,24 @@ export interface Props {
 const { section, landing } = Astro.props;
 const teachingMaterials = landing.teachingMaterials;
 const title = teachingMaterials?.title?.trim();
+const teachingMaterialsMobileBreakToken = "'고퀄리티 자체 교재'";
+const titleSegments = title
+  ? (() => {
+      const breakIndex = title.indexOf(teachingMaterialsMobileBreakToken);
+
+      if (breakIndex < 0) {
+        return [{ text: title, breakBefore: false }];
+      }
+
+      const leadingText = title.slice(0, breakIndex).trimEnd();
+      const trailingText = title.slice(breakIndex).trim();
+
+      return [
+        { text: leadingText, breakBefore: false },
+        { text: trailingText, breakBefore: Boolean(leadingText) }
+      ].filter((segment) => segment.text);
+    })()
+  : [];
 const description = teachingMaterials?.description?.trim();
 const books =
   teachingMaterials?.books?.flatMap((book) => {
@@ -41,7 +59,16 @@ const hasContent = Boolean(title && description && books.length);
       <Container class="teaching-materials-section__container">
         <div class="teaching-materials-section__grid">
           <div class="teaching-materials-section__header">
-            <h2 class="teaching-materials-section__headline">{title}</h2>
+            <h2 class="teaching-materials-section__headline">
+              {titleSegments.map((segment) => (
+                <>
+                  {segment.breakBefore ? (
+                    <br class="teaching-materials-section__headline-mobile-break" aria-hidden="true" />
+                  ) : null}
+                  <span class="teaching-materials-section__headline-chunk">{segment.text}</span>
+                </>
+              ))}
+            </h2>
             <p class="teaching-materials-section__description">{description}</p>
           </div>
           <ul class="teaching-materials-section__gallery" aria-label="서하늘 영어 자체교재 표지">
@@ -59,7 +86,7 @@ const hasContent = Boolean(title && description && books.length);
                     fallbackFormat="png"
                     layout="constrained"
                     widths={[320, 480, 640, 820]}
-                    sizes="(min-width: 1440px) 15rem, (min-width: 1024px) 14rem, (min-width: 860px) 17vw, (min-width: 720px) 18vw, 44vw"
+                    sizes="(min-width: 1440px) 19.5rem, (min-width: 1024px) 18rem, (min-width: 860px) 15rem, (min-width: 720px) 30vw, 44vw"
                   />
                 </article>
               </li>
