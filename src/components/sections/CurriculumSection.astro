@@ -14,19 +14,78 @@ const curriculumItem = landing.curriculum?.[curriculumIndex];
 const badge = curriculumItem?.badge?.trim();
 const title = curriculumItem?.title?.trim();
 const description = curriculumItem?.description?.trim();
+const timelineSteps =
+  curriculumItem?.steps
+    ?.map((step) => ({
+      title: step.title?.trim(),
+      description:
+        step.description?.map((line) => line.trim()).filter(Boolean) ?? [],
+    }))
+    .filter((step) => step.title || step.description.length) ?? [];
+const hasTimeline = timelineSteps.length > 0;
+const hasContent = Boolean(badge || title || description || hasTimeline);
 ---
 
-<SectionShell
-  id={section.id}
-  kind={section.kind}
-  class="curriculum-section"
-  surfaceClass="curriculum-section__surface"
->
-  <Container class="curriculum-section__container">
-    <div class="curriculum-section__inner">
-      {badge ? <span class="curriculum-section__badge">{badge}</span> : null}
-      {title ? <h2 class="curriculum-section__title">{title}</h2> : null}
-      {description ? <p class="curriculum-section__description">{description}</p> : null}
-    </div>
-  </Container>
-</SectionShell>
+{
+  hasContent ? (
+    <SectionShell
+      id={section.id}
+      kind={section.kind}
+      class="curriculum-section"
+      surfaceClass="curriculum-section__surface"
+    >
+      <Container class="curriculum-section__container">
+        <div
+          class:list={[
+            'curriculum-section__inner',
+            hasTimeline && 'curriculum-section__inner--timeline',
+          ]}
+        >
+          {hasTimeline ? (
+            <>
+              <div class="curriculum-section__heading">
+                {badge ? <span class="curriculum-section__badge">{badge}</span> : null}
+                {title ? <h2 class="curriculum-section__title">{title}</h2> : null}
+                {description ? (
+                  <p class="curriculum-section__description">{description}</p>
+                ) : null}
+              </div>
+
+              <ol
+                class="curriculum-section__timeline"
+                aria-label={title || section.label || '커리큘럼'}
+              >
+                {timelineSteps.map((step, index) => (
+                  <li class="curriculum-section__timeline-item">
+                    <span class="curriculum-section__timeline-marker" aria-hidden="true">
+                      {index + 1}
+                    </span>
+
+                    <div class="curriculum-section__timeline-card">
+                      {step.title ? (
+                        <h3 class="curriculum-section__timeline-title">{step.title}</h3>
+                      ) : null}
+                      {step.description.length ? (
+                        <p class="curriculum-section__timeline-description">
+                          {step.description.join('\n')}
+                        </p>
+                      ) : null}
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </>
+          ) : (
+            <>
+              {badge ? <span class="curriculum-section__badge">{badge}</span> : null}
+              {title ? <h2 class="curriculum-section__title">{title}</h2> : null}
+              {description ? (
+                <p class="curriculum-section__description">{description}</p>
+              ) : null}
+            </>
+          )}
+        </div>
+      </Container>
+    </SectionShell>
+  ) : null
+}

@@ -828,6 +828,20 @@ select {
   margin-inline: auto;
 }
 
+.curriculum-section__inner--timeline {
+  gap: clamp(1.5rem, 3vw, 3rem);
+  max-width: 72rem;
+}
+
+.curriculum-section__heading {
+  display: grid;
+  gap: 0.85rem;
+  align-self: start;
+  justify-self: end;
+  max-width: 21rem;
+  text-align: right;
+}
+
 .curriculum-section__badge {
   display: inline-flex;
   align-items: center;
@@ -853,12 +867,94 @@ select {
   line-height: 1.08;
 }
 
+.curriculum-section__inner--timeline .curriculum-section__title {
+  font-size: clamp(1.45rem, 6.2vw, 2.15rem);
+  white-space: nowrap;
+}
+
 .curriculum-section__description {
   margin: 0;
   color: #445066;
   font-size: clamp(1rem, 1.4vw, 1.12rem);
   font-weight: 500;
   line-height: 1.75;
+}
+
+.curriculum-section__timeline {
+  position: relative;
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.35rem);
+  align-items: start;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.curriculum-section__timeline::before {
+  content: "";
+  position: absolute;
+  top: 1.3rem;
+  bottom: 1.3rem;
+  left: 1.34rem;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    rgba(91, 131, 196, 0.18) 0%,
+    rgba(123, 99, 203, 0.42) 48%,
+    rgba(91, 131, 196, 0.12) 100%
+  );
+}
+
+.curriculum-section__timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  align-content: start;
+  align-items: start;
+  align-self: start;
+}
+
+.curriculum-section__timeline-marker {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(91, 131, 196, 0.2);
+  background: rgba(255, 255, 255, 0.92);
+  color: #214575;
+  font-family: "A2Z", "Pretendard", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.curriculum-section__timeline-card {
+  align-self: start;
+  padding: 0.15rem 0 0;
+}
+
+.curriculum-section__timeline-title {
+  margin: 0;
+  color: #183a6a;
+  font-family: "A2Z", "Pretendard", sans-serif;
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+}
+
+.curriculum-section__timeline-description {
+  margin: 0.6rem 0 0;
+  color: #445066;
+  font-size: clamp(0.98rem, 1.35vw, 1.08rem);
+  font-weight: 500;
+  line-height: 1.7;
+  white-space: pre-line;
 }
 
 .score-proof-section__surface {
@@ -1203,6 +1299,35 @@ select {
   .teacher-intro-section__visual {
     justify-content: center;
   }
+
+  .curriculum-section__heading {
+    width: fit-content;
+    max-width: none;
+  }
+
+  .curriculum-section__inner--timeline .curriculum-section__title {
+    font-size: clamp(2.7rem, 5.5vw, 4.65rem);
+  }
+
+  .curriculum-section__timeline {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: clamp(0.85rem, 1.3vw, 1.1rem);
+    padding-top: 1.9rem;
+  }
+
+  .curriculum-section__timeline::before {
+    top: 1.32rem;
+    right: 1.35rem;
+    bottom: auto;
+    left: 1.35rem;
+    width: auto;
+    height: 1px;
+  }
+
+  .curriculum-section__timeline-item {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -1218,6 +1343,20 @@ select {
 
   .teacher-intro-section__visual {
     min-height: clamp(19.2rem, 48vw, 27.2rem);
+  }
+
+  .curriculum-section__inner--timeline {
+    max-width: 48rem;
+  }
+
+  .curriculum-section__heading {
+    justify-self: stretch;
+    max-width: none;
+    text-align: left;
+  }
+
+  .curriculum-section__timeline {
+    grid-row: auto;
   }
 }
 
@@ -1390,6 +1529,33 @@ select {
 
   .score-proof-section__headline {
     font-size: clamp(1.9rem, 7.4vw, 2.7rem);
+  }
+
+  .curriculum-section__inner--timeline .curriculum-section__title {
+    font-size: clamp(1.45rem, 6.2vw, 2.15rem);
+  }
+
+  .curriculum-section__timeline::before {
+    left: 1.1rem;
+  }
+
+  .curriculum-section__timeline-item {
+    gap: 0.85rem;
+  }
+
+  .curriculum-section__timeline-marker {
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 0.9rem;
+  }
+
+  .curriculum-section__timeline-card {
+    border-radius: 1.25rem;
+    padding: 1rem 1rem 1.1rem;
+  }
+
+  .curriculum-section__timeline-title {
+    font-size: 1.18rem;
   }
 
   .score-proof-section__stats {

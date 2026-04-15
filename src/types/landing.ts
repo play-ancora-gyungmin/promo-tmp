@@ -79,6 +79,18 @@ export interface ScoreProofSchool {
   achievements?: string[];
 }
 
+export interface CurriculumStep {
+  title?: string;
+  description?: string[];
+}
+
+export interface CurriculumItem {
+  title?: string;
+  description?: string;
+  badge?: string;
+  steps?: CurriculumStep[];
+}
+
 export interface LandingData {
   brand?: {
     teacherName?: string;
@@ -113,11 +125,7 @@ export interface LandingData {
     title?: string;
     items?: string[];
   };
-  curriculum?: Array<{
-    title?: string;
-    description?: string;
-    badge?: string;
-  }>;
+  curriculum?: CurriculumItem[];
   teacherIntro?: {
     title?: string;
     body?: string;

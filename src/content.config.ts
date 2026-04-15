@@ -71,7 +71,13 @@ const teachers = defineCollection({
         z.object({
           title: z.string(),
           description: z.string(),
-          badge: z.string().optional()
+          badge: z.string().optional(),
+          steps: z.array(
+            z.object({
+              title: z.string(),
+              description: z.array(z.string()).optional()
+            }).partial()
+          ).optional()
         }).partial()
       ).optional(),
       teacherIntro: z.object({
