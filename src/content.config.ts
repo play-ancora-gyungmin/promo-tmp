@@ -21,24 +21,8 @@ const teachers = defineCollection({
     base: './src/content/teachers',
     pattern: '**/*.json'
   }),
-  schema: ({ image }) => {
-    const proofReviewSchema = z.object({
-      quote: z.string(),
-      name: z.string(),
-      alt: z.string().optional(),
-      caption: z.string().optional(),
-      image: image().optional()
-    }).partial();
-
-    const proofBlockSchema = z.object({
-      eyebrow: z.string().optional(),
-      title: z.string().optional(),
-      description: z.string().optional(),
-      reviews: z.array(proofReviewSchema).optional()
-    }).partial();
-
-    return z.object({
-      brand: z.object({
+  schema: ({ image }) => z.object({
+    brand: z.object({
         teacherName: z.string(),
         subject: z.string(),
         brandName: z.string(),
@@ -85,8 +69,17 @@ const teachers = defineCollection({
         items: z.array(z.string()).optional(),
         image: image().optional()
       }).partial().optional(),
-      proof: proofBlockSchema.optional(),
-      proofBlocks: z.record(z.string(), proofBlockSchema).optional(),
+      proof: z.object({
+        title: z.string(),
+        reviews: z.array(
+          z.object({
+            quote: z.string(),
+            name: z.string(),
+            alt: z.string().optional(),
+            image: image().optional()
+          }).partial()
+        )
+      }).partial().optional(),
       faq: z.array(
         z.object({
           question: z.string(),
@@ -104,9 +97,7 @@ const teachers = defineCollection({
           type: z.enum(sectionIds),
           enabled: z.boolean().optional(),
           label: z.string().optional(),
-          kind: z.enum(['slide', 'flow']).optional(),
-          variant: z.string().optional(),
-          contentKey: z.string().optional()
+          kind: z.enum(['slide', 'flow']).optional()
         })
       ).optional(),
       theme: z.object({
@@ -114,8 +105,7 @@ const teachers = defineCollection({
       }).partial().optional(),
       enabledSections: z.array(z.enum(sectionIds)).optional(),
       sectionOrder: z.array(z.enum(sectionIds)).optional()
-    });
-  }
+  })
 });
 
 export const collections = {

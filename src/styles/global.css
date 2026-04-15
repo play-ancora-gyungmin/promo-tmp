@@ -826,13 +826,6 @@ select {
   padding-block: clamp(3rem, 6vw, 5rem);
 }
 
-.proof-section__surface--spotlight {
-  background:
-    radial-gradient(circle at 14% 18%, rgba(224, 214, 255, 0.34), transparent 26%),
-    radial-gradient(circle at 88% 22%, rgba(190, 219, 255, 0.36), transparent 28%),
-    linear-gradient(180deg, rgba(255, 251, 247, 0.96), rgba(245, 248, 255, 0.94));
-}
-
 .proof-section__container {
   display: grid;
   gap: clamp(1.5rem, 2.8vw, 2.5rem);
@@ -857,34 +850,6 @@ select {
 
 .proof-section__headline-line {
   display: block;
-}
-
-.proof-section__heading-stack,
-.proof-section__spotlight-copy {
-  display: grid;
-  gap: 0.85rem;
-}
-
-.proof-section__eyebrow {
-  margin: 0;
-  color: #4d6fa4;
-  font-size: 0.82rem;
-  font-weight: 800;
-  letter-spacing: 0.18em;
-}
-
-.proof-section__description {
-  margin: 0;
-  color: #50617a;
-  font-size: clamp(1rem, 1.4vw, 1.08rem);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: 1.72;
-}
-
-.proof-section__description--centered {
-  max-width: 42rem;
-  margin-inline: auto;
 }
 
 .proof-section__marquee {
@@ -938,87 +903,6 @@ select {
   max-width: none;
   max-height: none;
   border-radius: 0.85rem;
-}
-
-.proof-section__spotlight {
-  display: grid;
-  gap: clamp(1.5rem, 3vw, 2.5rem);
-}
-
-.proof-section__headline--spotlight {
-  max-width: 12ch;
-  text-align: left;
-}
-
-.proof-section__spotlight-grid {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: start;
-}
-
-.proof-section__spotlight-card {
-  display: grid;
-  gap: 0.85rem;
-  padding: 0.7rem;
-  border: 1px solid rgba(78, 110, 161, 0.16);
-  border-radius: 1.3rem;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(247, 250, 255, 0.92)),
-    rgba(255, 255, 255, 0.88);
-  box-shadow:
-    0 18px 40px rgba(76, 103, 146, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.72);
-}
-
-.proof-section__spotlight-card--featured {
-  grid-row: span 2;
-}
-
-.proof-section__spotlight-image-wrap {
-  overflow: hidden;
-  border-radius: 1rem;
-  background: rgba(242, 246, 255, 0.92);
-}
-
-.proof-section__spotlight-image,
-.proof-section__spotlight-image img {
-  display: block;
-  width: 100% !important;
-  height: auto !important;
-}
-
-.proof-section__spotlight-meta {
-  display: grid;
-  gap: 0.45rem;
-  padding: 0 0.15rem 0.1rem;
-}
-
-.proof-section__spotlight-caption,
-.proof-section__spotlight-quote,
-.proof-section__spotlight-name {
-  margin: 0;
-}
-
-.proof-section__spotlight-caption {
-  color: #213552;
-  font-size: 0.99rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.5;
-}
-
-.proof-section__spotlight-quote {
-  color: #52617a;
-  font-size: 0.94rem;
-  line-height: 1.6;
-}
-
-.proof-section__spotlight-name {
-  color: #6e7f99;
-  font-size: 0.86rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
 }
 
 @keyframes proof-marquee {
@@ -1083,16 +967,6 @@ select {
 
   .teacher-intro-section__visual {
     justify-content: center;
-  }
-
-  .proof-section__spotlight {
-    grid-template-columns: minmax(18rem, 0.78fr) minmax(0, 1.22fr);
-    align-items: start;
-  }
-
-  .proof-section__spotlight-copy {
-    position: sticky;
-    top: clamp(1rem, 4vh, 2.5rem);
   }
 }
 
@@ -1291,49 +1165,6 @@ select {
   .proof-section__image,
   .proof-section__image img {
     height: min(16.8vh, 7.2rem) !important;
-  }
-
-  .proof-section__heading-stack,
-  .proof-section__spotlight-copy {
-    gap: 0.75rem;
-  }
-
-  .proof-section__eyebrow {
-    font-size: 0.76rem;
-    letter-spacing: 0.16em;
-  }
-
-  .proof-section__description {
-    font-size: 0.98rem;
-    line-height: 1.65;
-  }
-
-  .proof-section__spotlight-grid {
-    grid-template-columns: 1fr;
-    gap: 0.85rem;
-  }
-
-  .proof-section__spotlight-card,
-  .proof-section__spotlight-card--featured {
-    grid-row: auto;
-  }
-
-  .proof-section__spotlight-card {
-    padding: 0.5rem;
-    border-radius: 1.1rem;
-  }
-
-  .proof-section__spotlight-image-wrap {
-    border-radius: 0.8rem;
-  }
-
-  .proof-section__spotlight-meta {
-    gap: 0.35rem;
-    padding-inline: 0.05rem;
-  }
-
-  .proof-section__spotlight-caption {
-    font-size: 0.94rem;
   }
 }
 

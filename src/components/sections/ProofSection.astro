@@ -1,6 +1,5 @@
 ---
 import { Picture } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
 import type { LandingData, LandingSectionConfig } from '../../types/landing';
 import Container from '../layout/Container.astro';
 import SectionShell from '../layout/SectionShell.astro';
@@ -10,36 +9,20 @@ export interface Props {
   landing: LandingData;
 }
 
-interface ProofReviewCard {
-  image: ImageMetadata;
-  alt: string;
-  caption: string;
-  quote?: string;
-  name?: string;
-}
-
 const { section, landing } = Astro.props;
-const variant = section.variant?.trim() === 'spotlight' ? 'spotlight' : 'marquee';
-const contentKey = section.contentKey?.trim();
-const proofBlock = contentKey ? landing.proofBlocks?.[contentKey] : landing.proof;
-const eyebrow = proofBlock?.eyebrow?.trim();
-const title = proofBlock?.title?.trim() || '영어 성적 상승, 학생들의 후기로 증명합니다.';
-const description = proofBlock?.description?.trim();
+const title = landing.proof?.title?.trim() || '영어 성적 상승, 학생들의 후기로 증명합니다.';
 const titleCommaIndex = title.indexOf(',');
 const titleLines =
   titleCommaIndex >= 0
     ? [title.slice(0, titleCommaIndex + 1), title.slice(titleCommaIndex + 1).trimStart()].filter(Boolean)
     : [title];
 const reviews =
-  proofBlock?.reviews?.flatMap<ProofReviewCard>((review, index) =>
+  landing.proof?.reviews?.flatMap((review, index) =>
     review.image
       ? [
           {
             image: review.image,
-            alt: review.alt?.trim() || `카카오톡 성적 상승 후기 ${index + 1}`,
-            caption: review.caption?.trim() || review.alt?.trim() || `학생 후기 ${index + 1}`,
-            quote: review.quote?.trim(),
-            name: review.name?.trim()
+            alt: review.alt?.trim() || `카카오톡 성적 상승 후기 ${index + 1}`
           }
         ]
       : []
@@ -52,131 +35,48 @@ const reviewRows = [0, 1]
     originalCount: row.length,
     items: [...row, ...row]
   }));
-const spotlightReviews = reviews.slice(0, 5);
 ---
 
 <SectionShell
   id={section.id}
   kind={section.kind}
-  class={`proof-section proof-section--${variant}`}
-  surfaceClass={`proof-section__surface proof-section__surface--${variant}`}
+  class="proof-section"
+  surfaceClass="proof-section__surface"
 >
   <Container class="proof-section__container">
+    <div class="proof-section__heading">
+      <h2 class="proof-section__headline">
+        {titleLines.map((line) => (
+          <span class="proof-section__headline-line">{line}</span>
+        ))}
+      </h2>
+    </div>
+
     {
-      variant === 'spotlight' ? (
-        <div class="proof-section__spotlight">
-          <div class="proof-section__spotlight-copy">
-            {eyebrow ? <p class="proof-section__eyebrow">{eyebrow}</p> : null}
-
-            <h2 class="proof-section__headline proof-section__headline--spotlight">
-              {titleLines.map((line) => (
-                <span class="proof-section__headline-line">{line}</span>
-              ))}
-            </h2>
-
-            {
-              description ? (
-                <p class="proof-section__description">{description}</p>
-              ) : null
-            }
-          </div>
-
-          {
-            spotlightReviews.length ? (
-              <div class="proof-section__spotlight-grid" aria-label="학생 후기 카드 모음">
-                {spotlightReviews.map((review, index) => (
-                  <article
-                    class:list={[
-                      'proof-section__spotlight-card',
-                      index === 0 && 'proof-section__spotlight-card--featured'
-                    ]}
-                  >
-                    <div class="proof-section__spotlight-image-wrap">
-                      <Picture
-                        src={review.image}
-                        alt={review.alt}
-                        class="proof-section__spotlight-image"
-                        formats={['avif', 'webp']}
-                        fallbackFormat="png"
-                        layout="constrained"
-                        widths={[480, 640, 800, 960]}
-                        sizes={
-                          index === 0
-                            ? '(min-width: 1200px) 28rem, (min-width: 720px) 50vw, 92vw'
-                            : '(min-width: 1200px) 13rem, (min-width: 720px) 25vw, 44vw'
-                        }
-                      />
-                    </div>
-
-                    <div class="proof-section__spotlight-meta">
-                      <p class="proof-section__spotlight-caption">{review.caption}</p>
-
-                      {
-                        review.quote ? (
-                          <p class="proof-section__spotlight-quote">{review.quote}</p>
-                        ) : null
-                      }
-
-                      {
-                        review.name ? (
-                          <p class="proof-section__spotlight-name">{review.name}</p>
-                        ) : null
-                      }
-                    </div>
+      reviewRows.length ? (
+        <div class="proof-section__marquee" aria-label="학생 카카오톡 후기 카드">
+          {reviewRows.map((row) => (
+            <div class="proof-section__track">
+              <div class:list={['proof-section__rail', row.direction === 'reverse' && 'proof-section__rail--reverse']}>
+                {row.items.map((review, index) => (
+                  <article class="proof-section__card" aria-hidden={index >= row.originalCount ? 'true' : undefined}>
+                    <Picture
+                      src={review.image}
+                      alt={index >= row.originalCount ? '' : review.alt}
+                      class="proof-section__image"
+                      formats={['avif', 'webp']}
+                      fallbackFormat="png"
+                      layout="constrained"
+                      widths={[480, 640, 800, 960]}
+                      sizes="(min-width: 1200px) 17rem, (min-width: 720px) 15rem, 46vw"
+                    />
                   </article>
                 ))}
               </div>
-            ) : null
-          }
-        </div>
-      ) : (
-        <>
-          <div class="proof-section__heading">
-            <div class="proof-section__heading-stack">
-              {eyebrow ? <p class="proof-section__eyebrow">{eyebrow}</p> : null}
-
-              <h2 class="proof-section__headline">
-                {titleLines.map((line) => (
-                  <span class="proof-section__headline-line">{line}</span>
-                ))}
-              </h2>
-
-              {
-                description ? (
-                  <p class="proof-section__description proof-section__description--centered">{description}</p>
-                ) : null
-              }
             </div>
-          </div>
-
-          {
-            reviewRows.length ? (
-              <div class="proof-section__marquee" aria-label="학생 카카오톡 후기 카드">
-                {reviewRows.map((row) => (
-                  <div class="proof-section__track">
-                    <div class:list={['proof-section__rail', row.direction === 'reverse' && 'proof-section__rail--reverse']}>
-                      {row.items.map((review, index) => (
-                        <article class="proof-section__card" aria-hidden={index >= row.originalCount ? 'true' : undefined}>
-                          <Picture
-                            src={review.image}
-                            alt={index >= row.originalCount ? '' : review.alt}
-                            class="proof-section__image"
-                            formats={['avif', 'webp']}
-                            fallbackFormat="png"
-                            layout="constrained"
-                            widths={[480, 640, 800, 960]}
-                            sizes="(min-width: 1200px) 17rem, (min-width: 720px) 15rem, 46vw"
-                          />
-                        </article>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : null
-          }
-        </>
-      )
+          ))}
+        </div>
+      ) : null
     }
   </Container>
 </SectionShell>

@@ -109,40 +109,6 @@
       }
     ]
   },
-  "proofBlocks": {
-    "student-voices": {
-      "eyebrow": "REVIEW ARCHIVE",
-      "title": "점수만 오른 것이 아니라, 수업 방식까지 기억에 남았습니다.",
-      "description": "단어 자료, 동형 모의고사, 클리닉과 같은 실제 수업 경험이 학생 후기 안에 구체적으로 남아 있습니다. 두 번째 후기 섹션은 그 디테일을 더 또렷하게 보여주기 위한 버전입니다.",
-      "reviews": [
-        {
-          "image": "../../assets/images/reviews/e_h94Ud018svc1dtb6se7zp60p_ibmxj.jpg",
-          "alt": "72점에서 96점으로 상승했다고 전한 카카오톡 후기",
-          "caption": "72점에서 96점까지 오른 실제 성적 상승 후기"
-        },
-        {
-          "image": "../../assets/images/reviews/f_194Ud018svc1p9nrvn8t91p_ibmxj.jpg",
-          "alt": "동형모고와 단어 자료가 도움이 됐다고 전한 카카오톡 후기",
-          "caption": "동형 모의고사와 단어 자료가 실전에 바로 연결됐다는 후기"
-        },
-        {
-          "image": "../../assets/images/reviews/f_194Ud018svcadqddlqqo4hm_ibmxj.jpg",
-          "alt": "시험에 선생님이 알려준 단어가 많이 나왔다고 전한 카카오톡 후기",
-          "caption": "수업에서 다룬 단어가 실제 시험에 많이 나왔다는 반응"
-        },
-        {
-          "image": "../../assets/images/reviews/f_094Ud018svcoxnhlrqx4pjn_ibmxj.jpg",
-          "alt": "유의어와 외부지문 읽는 법이 도움이 됐다고 전한 카카오톡 후기",
-          "caption": "유의어 정리와 외부지문 읽기 전략이 도움이 됐다는 후기"
-        },
-        {
-          "image": "../../assets/images/reviews/f_394Ud018svcnffp93lbokmo_ibmxj.jpg",
-          "alt": "클리닉과 자체 교재에 감사하며 더 열심히 하겠다고 전한 카카오톡 후기",
-          "caption": "클리닉과 자체 교재의 밀도를 좋게 기억한 학생 반응"
-        }
-      ]
-    }
-  },
   "faq": [
     {
       "question": "지금은 어디까지 완료됐나요?",
@@ -177,38 +143,20 @@
   "theme": {
     "variant": "daySky"
   },
-  "sections": [
-    {
-      "id": "hero",
-      "type": "hero"
-    },
-    {
-      "id": "teacherIntro",
-      "type": "teacherIntro"
-    },
-    {
-      "id": "proof",
-      "type": "proof",
-      "variant": "marquee"
-    },
-    {
-      "id": "proof-2",
-      "type": "proof",
-      "label": "후기 섹션 2",
-      "variant": "spotlight",
-      "contentKey": "student-voices"
-    },
-    {
-      "id": "curriculum",
-      "type": "curriculum"
-    },
-    {
-      "id": "teachingMaterials",
-      "type": "teachingMaterials"
-    },
-    {
-      "id": "contact",
-      "type": "contact"
-    }
+  "enabledSections": [
+    "hero",
+    "teacherIntro",
+    "proof",
+    "curriculum",
+    "teachingMaterials",
+    "contact"
+  ],
+  "sectionOrder": [
+    "hero",
+    "teacherIntro",
+    "proof",
+    "curriculum",
+    "teachingMaterials",
+    "contact"
   ]
 }
